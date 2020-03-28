@@ -1,54 +1,23 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wh1te5old.GitHub.io</id>
-    <title>Wh1te5old的博客</title>
-    <updated>2020-03-28T09:51:44.230Z</updated>
+    <title>Wh1te5old的小站</title>
+    <updated>2020-03-28T12:54:08.643Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wh1te5old.GitHub.io"/>
     <link rel="self" href="https://wh1te5old.GitHub.io/atom.xml"/>
     <subtitle>好好学习 天天向上</subtitle>
     <logo>https://wh1te5old.GitHub.io/images/avatar.png</logo>
     <icon>https://wh1te5old.GitHub.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Wh1te5old的博客</rights>
+    <rights>All rights reserved 2020, Wh1te5old的小站</rights>
     <entry>
-        <title type="html"><![CDATA[方佳卓是个啥篮子]]></title>
+        <title type="html"><![CDATA[Wh1te5old]]></title>
         <id>https://wh1te5old.GitHub.io/post/111111111/</id>
         <link href="https://wh1te5old.GitHub.io/post/111111111/">
         </link>
         <updated>2020-03-28T06:39:36.000Z</updated>
-        <content type="html"><![CDATA[<p>带专人 带专魂 带专专做人上人</p>
-]]></content>
-    </entry>
-    <entry>
-        <title type="html"><![CDATA[Hello Gridea]]></title>
-        <id>https://wh1te5old.GitHub.io/post/hello-gridea/</id>
-        <link href="https://wh1te5old.GitHub.io/post/hello-gridea/">
-        </link>
-        <updated>2018-12-11T16:00:00.000Z</updated>
-        <summary type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-]]></summary>
-        <content type="html"><![CDATA[<p>👏  欢迎使用 <strong>Gridea</strong> ！<br>
-✍️  <strong>Gridea</strong> 一个静态博客写作客户端。你可以用它来记录你的生活、心情、知识、笔记、创意... ...</p>
-<!-- more -->
-<p><a href="https://github.com/getgridea/gridea">Github</a><br>
-<a href="https://gridea.dev/">Gridea 主页</a><br>
-<a href="http://fehey.com/">示例网站</a></p>
-<h2 id="特性">特性👇</h2>
-<p>📝  你可以使用最酷的 <strong>Markdown</strong> 语法，进行快速创作</p>
-<p>🌉  你可以给文章配上精美的封面图和在文章任意位置插入图片</p>
-<p>🏷️  你可以对文章进行标签分组</p>
-<p>📋  你可以自定义菜单，甚至可以创建外部链接菜单</p>
-<p>💻  你可以在 <strong>Windows</strong>，<strong>MacOS</strong> 或 <strong>Linux</strong> 设备上使用此客户端</p>
-<p>🌎  你可以使用 <strong>𝖦𝗂𝗍𝗁𝗎𝖻 𝖯𝖺𝗀𝖾𝗌</strong> 或 <strong>Coding Pages</strong> 向世界展示，未来将支持更多平台</p>
-<p>💬  你可以进行简单的配置，接入 <a href="https://github.com/gitalk/gitalk">Gitalk</a> 或 <a href="https://github.com/SukkaW/DisqusJS">DisqusJS</a> 评论系统</p>
-<p>🇬🇧  你可以使用<strong>中文简体</strong>或<strong>英语</strong></p>
-<p>🌁  你可以任意使用应用内默认主题或任意第三方主题，强大的主题自定义能力</p>
-<p>🖥  你可以自定义源文件夹，利用 OneDrive、百度网盘、iCloud、Dropbox 等进行多设备同步</p>
-<p>🌱 当然 <strong>Gridea</strong> 还很年轻，有很多不足，但请相信，它会不停向前 🏃</p>
-<p>未来，它一定会成为你离不开的伙伴</p>
-<p>尽情发挥你的才华吧！</p>
-<p>😘 Enjoy~</p>
+        <content type="html"><![CDATA[<p>欢迎来到小站🙂,我会在这里分享一些平时遇到的问题和解决方法,还会分享一些其他的东西,比如电脑壁纸,软件,书等,如果发现内容有问题可以和我联系.</p>
+<p>不积跬步无以至千里，不积小流无以成江海.虽然现在我是个小白,但是我相信,通过努力和学习,我一定能成为大海.</p>
 ]]></content>
     </entry>
 </feed>
