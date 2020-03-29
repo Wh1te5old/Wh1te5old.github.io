@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wh1te5old.GitHub.io</id>
     <title>Wh1te5old的小站</title>
-    <updated>2020-03-28T13:09:46.464Z</updated>
+    <updated>2020-03-29T00:27:35.591Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wh1te5old.GitHub.io"/>
     <link rel="self" href="https://wh1te5old.GitHub.io/atom.xml"/>
@@ -11,15 +11,17 @@
     <icon>https://wh1te5old.GitHub.io/favicon.ico</icon>
     <rights>All rights reserved 2020, Wh1te5old的小站</rights>
     <entry>
+        <title type="html"><![CDATA[壁纸]]></title>
+        <id>https://wh1te5old.GitHub.io/post/bi-zhi/</id>
+        <link href="https://wh1te5old.GitHub.io/post/bi-zhi/">
+        </link>
+        <updated>2020-03-28T22:52:37.000Z</updated>
+    </entry>
+    <entry>
         <title type="html"><![CDATA[关于Wh1te5old的小站]]></title>
         <id>https://wh1te5old.GitHub.io/post/info/</id>
         <link href="https://wh1te5old.GitHub.io/post/info/">
         </link>
         <updated>2020-03-28T06:39:36.000Z</updated>
-        <content type="html"><![CDATA[<p>欢迎来到小站🙂,我会在这里分享一些平时遇到的问题和解决方法,还会分享一些其他的东西,比如电脑壁纸,软件,书等,如果发现内容有问题可以和我联系.</p>
-<p>联系方式:<br>
-Q Q : 2251612642<br>
-邮箱 : wh1et5old@163.com</p>
-]]></content>
     </entry>
 </feed>
