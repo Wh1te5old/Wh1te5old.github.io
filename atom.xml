@@ -1,13 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wh1te5old.GitHub.io</id>
-    <title>Wh1te5old的小站</title>
-    <updated>2020-04-21T07:09:49.734Z</updated>
+    <title>Wh1te5old</title>
+    <updated>2020-04-21T13:22:44.751Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wh1te5old.GitHub.io"/>
     <link rel="self" href="https://wh1te5old.GitHub.io/atom.xml"/>
-    <subtitle>GitHub</subtitle>
+    <subtitle>愿我们在到达路的末端时都不会后悔</subtitle>
     <logo>https://wh1te5old.GitHub.io/images/avatar.png</logo>
     <icon>https://wh1te5old.GitHub.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Wh1te5old的小站</rights>
+    <rights>All rights reserved 2020, Wh1te5old</rights>
+    <entry>
+        <title type="html"><![CDATA[Java练习题]]></title>
+        <id>https://wh1te5old.GitHub.io/post/java-lian-xi-ti/</id>
+        <link href="https://wh1te5old.GitHub.io/post/java-lian-xi-ti/">
+        </link>
+        <updated>2020-04-21T07:43:15.000Z</updated>
+        <summary type="html"><![CDATA[<p>1.它的排序方法类似于冒泡动作，所以起名为冒泡排序法。另外，这也是学校考试和公司面试的常见考题。对于学习程序算法来说冒泡排序是一个很好的入门题目。<br>
+<strong>题目:创建数组,使用冒泡排序给数组从小到大排序</strong></p>
+]]></summary>
+        <content type="html"><![CDATA[<p>1.它的排序方法类似于冒泡动作，所以起名为冒泡排序法。另外，这也是学校考试和公司面试的常见考题。对于学习程序算法来说冒泡排序是一个很好的入门题目。<br>
+<strong>题目:创建数组,使用冒泡排序给数组从小到大排序</strong></p>
+<!-- more -->
+<pre><code>	int num[] = new int[]{9,6,3,5,1,2,4,7,8};	//创建数组
+	System.out.print(&quot;排序前:&quot;);					//输出排序前数组
+	for (int i = 0; i &lt; num.length; i++) {
+	System.out.print(num[i]+&quot;,&quot;);
+	}
+	
+	for (int i = num.length-1; i &gt; 0; i--) {	//十个数据比较次数应该为9次,所以i的值应该是num.length-1,每次循环比较完,最大数就不用比较了,所以i--
+		for (int j = 0; j &lt; i; j++) {
+			if (num[j] &gt; num[j+1]) {			//条件:前面的数比后面数大
+				int temp = num[j];			    //将前面的值复制给temp变量
+				num[j] = num[j+1];				//将后面的值赋值给前面的
+				num[j+1] = temp;				//将temp赋值给后面的数
+			}
+					
+		}
+	}
+	
+	System.out.print(&quot;\n排序后:&quot;);				//输出排序后数组
+	for (int i = 0; i &lt; num.length; i++) {
+	System.out.print(num[i]+&quot;,&quot;);
+	}
+</code></pre>
+<!-- more -->
+<!-- more -->
+<h1 id="持续更新">持续更新</h1>
+]]></content>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[Java基础]]></title>
+        <id>https://wh1te5old.GitHub.io/post/java-ji-chu-pian/</id>
+        <link href="https://wh1te5old.GitHub.io/post/java-ji-chu-pian/">
+        </link>
+        <updated>2020-04-21T07:37:07.000Z</updated>
+    </entry>
 </feed>
