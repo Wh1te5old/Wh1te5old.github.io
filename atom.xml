@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wh1te5old.GitHub.io</id>
-    <title>Wh1te5old</title>
-    <updated>2020-04-21T13:22:44.751Z</updated>
+    <title>Wh1te5old个人站</title>
+    <updated>2020-04-21T14:22:13.032Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wh1te5old.GitHub.io"/>
     <link rel="self" href="https://wh1te5old.GitHub.io/atom.xml"/>
-    <subtitle>愿我们在到达路的末端时都不会后悔</subtitle>
+    <subtitle>花有重开日 人无再少年</subtitle>
     <logo>https://wh1te5old.GitHub.io/images/avatar.png</logo>
     <icon>https://wh1te5old.GitHub.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Wh1te5old</rights>
+    <rights>All rights reserved 2020, Wh1te5old个人站</rights>
     <entry>
         <title type="html"><![CDATA[Java练习题]]></title>
         <id>https://wh1te5old.GitHub.io/post/java-lian-xi-ti/</id>
@@ -55,5 +55,23 @@
         <link href="https://wh1te5old.GitHub.io/post/java-ji-chu-pian/">
         </link>
         <updated>2020-04-21T07:37:07.000Z</updated>
+    </entry>
+    <entry>
+        <title type="html"><![CDATA[关于]]></title>
+        <id>https://wh1te5old.GitHub.io/post/about/</id>
+        <link href="https://wh1te5old.GitHub.io/post/about/">
+        </link>
+        <updated>2019-01-25T11:09:48.000Z</updated>
+        <content type="html"><![CDATA[<p>👴您好,欢迎来到我的个人站🙋‍♂,我在这里记录关于编程的内容,欢迎你🙃感兴趣的话可以经常来看看,<br>
+基础篇和练习题持续更新</p>
+<p>如果发现有任何问题请联系我<br>
+QQ:2251612642<br>
+邮箱:wh1te5old@163.com</p>
+<p>Java,从入门👦到<br>
+🕴  🕴  🕴<br>
+👴<br>
+🕴  🕴  🕴<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1587477816445.PNG" alt="" loading="lazy"></p>
+]]></content>
     </entry>
 </feed>
