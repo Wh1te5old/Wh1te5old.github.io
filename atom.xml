@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wh1te5old.GitHub.io</id>
-    <title>Wh1te5old个人站</title>
-    <updated>2020-04-21T14:22:13.032Z</updated>
+    <title>Wh1te5old</title>
+    <updated>2020-04-21T14:41:00.043Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wh1te5old.GitHub.io"/>
     <link rel="self" href="https://wh1te5old.GitHub.io/atom.xml"/>
     <subtitle>花有重开日 人无再少年</subtitle>
     <logo>https://wh1te5old.GitHub.io/images/avatar.png</logo>
     <icon>https://wh1te5old.GitHub.io/favicon.ico</icon>
-    <rights>All rights reserved 2020, Wh1te5old个人站</rights>
+    <rights>All rights reserved 2020, Wh1te5old</rights>
     <entry>
         <title type="html"><![CDATA[Java练习题]]></title>
         <id>https://wh1te5old.GitHub.io/post/java-lian-xi-ti/</id>
@@ -55,6 +55,11 @@
         <link href="https://wh1te5old.GitHub.io/post/java-ji-chu-pian/">
         </link>
         <updated>2020-04-21T07:37:07.000Z</updated>
+        <content type="html"><![CDATA[<p>Java,从入门到<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1587477816445.PNG" alt="" loading="lazy"></p>
+<p>1.Java简介<br>
+Java简介Java是Sun Microsystems公司推出的能够跨越多平台的、可移植性最高的一种面向对象的编程语言。自从面世以来一直以易学易用、功能强大的特点得到了广泛的应用。其强大的跨平台特性使Java程序可以运行在任何一个系统平台上，甚至是手持电话、商务助理等电子产品，都可以运行Java程序，真正做到“一次编写，到处运行”。Java语言可以编写桌面应用程序、Web应用程序、分布式系统、嵌入式系统应用程序等，这使得Java语言成为应用范围最广阔的开发语言。本节将介绍Java语言的作用以及如何学好Java语言。</p>
+]]></content>
     </entry>
     <entry>
         <title type="html"><![CDATA[关于]]></title>
@@ -62,16 +67,11 @@
         <link href="https://wh1te5old.GitHub.io/post/about/">
         </link>
         <updated>2019-01-25T11:09:48.000Z</updated>
-        <content type="html"><![CDATA[<p>👴您好,欢迎来到我的个人站🙋‍♂,我在这里记录关于编程的内容,欢迎你🙃感兴趣的话可以经常来看看,<br>
-基础篇和练习题持续更新</p>
-<p>如果发现有任何问题请联系我<br>
+        <content type="html"><![CDATA[<p>👴您好,欢迎来到我的个人站🙋‍♂<br>
+我在这里记录关于编程的内容,一是方便我复习,二是为了分享给对编程感兴趣的人😃</p>
+<p>如果发现有任何问题请联系我🤝谢谢<br>
 QQ:2251612642<br>
 邮箱:wh1te5old@163.com</p>
-<p>Java,从入门👦到<br>
-🕴  🕴  🕴<br>
-👴<br>
-🕴  🕴  🕴<br>
-<img src="https://wh1te5old.GitHub.io/post-images/1587477816445.PNG" alt="" loading="lazy"></p>
 ]]></content>
     </entry>
 </feed>
