@@ -980,7 +980,7 @@ td {
       }
     
       .post-detail .post .post-content p {
-        font-size: 26px;
+        font-size: 18px;
       }
     
       .post-container .post .post-title {
@@ -1001,7 +1001,7 @@ td {
       }
     
       .main {
-        background: #212529;
+        background: #f8f9fa;
       }
     
       body {
@@ -1009,14 +1009,14 @@ td {
       }
     
       body {
-        color: #f8f9fa;
+        color: #212529;
       }
     
       a {
-        color: #f8f9fa;
+        color: #212529;
       }
     
       a:hover {
-        color: #f8f9fa;
+        color: #212529;
       }
     
