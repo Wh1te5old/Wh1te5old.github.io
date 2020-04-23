@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Java练习题 | Wh1te5old</title>
-<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1587552839623">
+<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1587614747748">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Java练习题 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
@@ -24,7 +24,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://wh1te5old.GitHub.io">
-  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1587552839623" alt="">
+  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1587614747748" alt="">
   </a>
   <h1 class="site-title">
     Wh1te5old
@@ -109,9 +109,9 @@
 	for (int i = num.length-1; i &gt; 0; i--) {	//十个数据比较次数应该为9次,所以i的值应该是num.length-1,每次循环比较完,最大数就不用比较了,所以i--
 		for (int j = 0; j &lt; i; j++) {
 			if (num[j] &gt; num[j+1]) {			//条件:前面的数比后面数大
-				int temp = num[j];			    //将前面的值复制给temp变量
-				num[j] = num[j+1];				//将后面的值赋值给前面的
-				num[j+1] = temp;				//将temp赋值给后面的数
+			    int temp = num[j];			    //将前面的值复制给temp变量
+			    num[j] = num[j+1];				//将后面的值赋值给前面的
+			    num[j+1] = temp;				//将temp赋值给后面的数
 			}
 					
 		}
@@ -123,14 +123,14 @@
 	}
 </code></pre>
 <!-- more -->
-<p>题目: 99乘法表<br>
-for (int i = 1; i &lt;= 9; i++) {			//外层循环控制行数</p>
-<pre><code>			for (int j = 1; j &lt;= i; j++) {		//内层循环控制列
-				String str = j+&quot;*&quot;+i+&quot;=&quot;+j*i;	//把表达式和运算结果赋值给str
-				System.out.print(str+&quot;\t&quot;);		//输出
-			}
+<p><strong>题目: 99乘法表</strong></p>
+<pre><code>for (int i = 1; i &lt;= 9; i++) {			//外层循环控制行数
+	for (int j = 1; j &lt;= i; j++) {		//内层循环控制列
+		    String str = j+&quot;*&quot;+i+&quot;=&quot;+j*i;	//把表达式和运算结果赋值给str
+			System.out.print(str+&quot;\t&quot;);		//输出
+}
 			System.out.println();				//换行
-		}
+}
 </code></pre>
 <!-- more -->
 

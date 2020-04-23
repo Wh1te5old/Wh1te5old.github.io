@@ -1,0 +1,498 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>搭建一个SSM框架 | Wh1te5old</title>
+<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1587614747748">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="搭建一个SSM框架 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="搭建这个框架是很痛苦的,会用到10分钟或更多的时间,如果那个地方忘写了,写错了,等程序跑起来报错更痛苦.我自己也经常出错和忘记步骤,所以我在这里把搭建步骤写下来.
+开发工具 : eclipse 2017
+数据库 : mysql5.6
+项目结..." />
+    <meta name="keywords" content="" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://wh1te5old.GitHub.io">
+  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1587614747748" alt="">
+  </a>
+  <h1 class="site-title">
+    Wh1te5old
+  </h1>
+  <p class="site-description">
+    花有重开日 人无再少年
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="https://wh1te5old.GitHub.io/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://wh1te5old.GitHub.io/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              搭建一个SSM框架
+            </h2>
+            <div class="post-info">
+              <span>
+                2020-04-23
+              </span>
+              <span>
+                15 min read
+              </span>
+              
+            </div>
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p><code>搭建这个框架是很痛苦的,会用到10分钟或更多的时间,如果那个地方忘写了,写错了,等程序跑起来报错更痛苦.我自己也经常出错和忘记步骤,所以我在这里把搭建步骤写下来.</code></p>
+<p>开发工具 : eclipse 2017<br>
+数据库 : mysql5.6<br>
+项目结构 : maven<br>
+JDK1.8<br>
+Windows10系统</p>
+<p><strong>1.创建Maven项目</strong><br>
+<img src="https://wh1te5old.GitHub.io/post-images/1587607624789.PNG" alt="" loading="lazy"><br>
+<code>如果项目像图中这样报错的话,右键点击项目,选择Java EE tools,点第二个Generate Depolyment Descriptor Stub,自动生成webapp下的WEB-INF文件夹和web.xml文件</code></p>
+<!-- more -->
+<!-- more -->
+<p><strong>2.导入jar包</strong><br>
+<img src="https://wh1te5old.GitHub.io/post-images/1587609576657.PNG" alt="" loading="lazy"><br>
+<code>这里面除了框架所需要的jar外还加入了其他的jar包,比如jackson的,druid连接池的jar包,还有分页用的pagehelper</code><br>
+<dependency><br>
+<groupId>org.springframework</groupId><br>
+<artifactId>spring-beans</artifactId><br>
+<version>5.1.6.RELEASE</version><br>
+</dependency></p>
+<pre><code>                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-context&lt;/artifactId&gt;
+                                &lt;version&gt;5.1.6.RELEASE&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-core&lt;/artifactId&gt;
+                                &lt;version&gt;5.1.6.RELEASE&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-expression&lt;/artifactId&gt;
+                                &lt;version&gt;5.1.6.RELEASE&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-aop&lt;/artifactId&gt;
+                                &lt;version&gt;5.1.6.RELEASE&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-jdbc&lt;/artifactId&gt;
+                                &lt;version&gt;5.1.6.RELEASE&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-tx&lt;/artifactId&gt;
+                                &lt;version&gt;5.1.6.RELEASE&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-web&lt;/artifactId&gt;
+                                &lt;version&gt;5.1.6.RELEASE&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-webmvc&lt;/artifactId&gt;
+                                &lt;version&gt;5.1.6.RELEASE&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+                                &lt;artifactId&gt;mybatis&lt;/artifactId&gt;
+                                &lt;version&gt;3.5.1&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.mybatis&lt;/groupId&gt;
+                                &lt;artifactId&gt;mybatis-spring&lt;/artifactId&gt;
+                                &lt;version&gt;2.0.1&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;mysql&lt;/groupId&gt;
+                             &lt;artifactId&gt;mysql-connector-java&lt;artifactId&gt;
+                                &lt;version&gt;5.1.42&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                            &lt;groupId&gt;com.fasterxml.jackson.core&lt;groupId&gt;
+                                &lt;artifactId&gt;jackson-core&lt;/artifactId&gt;
+                                &lt;version&gt;2.10.0&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                            &lt;groupId&gt;com.fasterxml.jackson.core&lt;groupId&gt;
+                            &lt;artifactId&gt;jackson-annotations&lt;artifactId&gt;
+                                &lt;version&gt;2.10.0&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                            &lt;groupId&gt;com.fasterxml.jackson.core&lt;groupId&gt;
+                                &lt;artifactId&gt;jackson-databind&lt;/artifactId&gt;
+                                &lt;version&gt;2.10.0&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;com.alibaba&lt;/groupId&gt;
+                                &lt;artifactId&gt;druid&lt;/artifactId&gt;
+                                &lt;version&gt;1.1.10&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;com.github.pagehelper&lt;/groupId&gt;
+                                &lt;artifactId&gt;pagehelper&lt;/artifactId&gt;
+                                &lt;version&gt;5.1.4&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;com.github.jsqlparser&lt;/groupId&gt;
+                                &lt;artifactId&gt;jsqlparser&lt;/artifactId&gt;
+                                &lt;version&gt;0.9.5&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;com.sun.mail&lt;/groupId&gt;
+                                &lt;artifactId&gt;javax.mail&lt;/artifactId&gt;
+                                &lt;version&gt;1.6.2&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;org.springframework&lt;/groupId&gt;
+                                &lt;artifactId&gt;spring-aspects&lt;/artifactId&gt;
+                                &lt;version&gt;5.1.6.RELEASE&lt;/version&gt;
+                            &lt;/dependency&gt;
+
+                            &lt;dependency&gt;
+                                &lt;groupId&gt;javax.servlet&lt;/groupId&gt;
+                                &lt;artifactId&gt;jstl&lt;/artifactId&gt;
+                                &lt;version&gt;1.2&lt;/version&gt;
+                            &lt;/dependency&gt;
+                        &lt;/dependencies&gt;`
+                        &lt;distributionManagement&gt;
+	&lt;repository&gt;
+		&lt;id&gt;releases&lt;/id&gt;
+		&lt;name&gt;Releases&lt;/name&gt;
+		&lt;url&gt;http://192.168.135.80:8081/nexus/content/repositories/releases/&lt;/url&gt;
+	&lt;/repository&gt;
+	&lt;snapshotRepository&gt;
+		&lt;id&gt;snapshots&lt;/id&gt;
+		&lt;name&gt;Snapshots&lt;/name&gt;
+		&lt;url&gt;http://192.168.135.80:8081/nexus/content/repositories/snapshots/&lt;/url&gt;
+	&lt;/snapshotRepository&gt;
+	  &lt;/distributionManagement&gt;
+</code></pre>
+<!-- more -->
+<p><strong>3.配置web.xml</strong><br>
+//加载spring核心配置文件</p>
+<pre><code>&lt;context-param&gt;
+    &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;     
+    &lt;param-value&gt;classpath:spring-*.xml&lt;/param-value&gt;
+&lt;/context-param&gt;
+
+
+//配置监听器
+    
+&lt;listener&gt;
+&lt;listener-class&gt;org.springframework.web.context.ContextLoaderListener&lt;listener-class&gt;
+&lt;/listener&gt;
+</code></pre>
+<p>//字符编码过滤器 解决post乱码问题</p>
+<pre><code>&lt;filter&gt;
+    &lt;filter-name&gt;encoding&lt;/filter-name&gt;
+    &lt;filter-class&gt;org.springframework.web.filter.CharacterEncodingFilter&lt;/filter-class&gt;
+        &lt;init-param&gt;
+        &lt;param-name&gt;encoding&lt;/param-name&gt;
+        &lt;param-value&gt;utf-8&lt;/param-value&gt;
+        &lt;/init-param&gt;
+&lt;/filter&gt;
+&lt;filter-mapping&gt;
+    &lt;filter-name&gt;encoding&lt;/filter-name&gt;
+    &lt;url-pattern&gt;/*&lt;/url-pattern&gt;
+&lt;/filter-mapping&gt;
+</code></pre>
+  <!-- 配置SpringMVC核心控制器 DispatcherServlet -->
+<pre><code>&lt;servlet&gt;
+&lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;
+&lt;servlet-class&gt;org.springframework.web.servlet.DispatcherServlet&lt;/servlet-class&gt;
+&lt;init-param&gt;
+  &lt;param-name&gt;contextConfigLocation&lt;/param-name&gt;
+  &lt;param-value&gt;classpath:springmvc.xml&lt;/param-value&gt;
+&lt;/init-param&gt;
+&lt;load-on-startup&gt;1&lt;/load-on-startup&gt;  //必须为整数,等于或大于0时SpringMVC随着Tomcat容器启动而启动,小于0时在第一次请求启动 --&gt;
+&lt;/servlet&gt;
+
+&lt;servlet-mapping&gt;
+     &lt;servlet-name&gt;springDispatcherServlet&lt;/servlet-name&gt;
+    &lt;url-pattern&gt;/&lt;/url-pattern&gt;
+&lt;/servlet-mapping&gt;
+</code></pre>
+<!-- more -->
+<p><strong>4.spring+springMVC+Mybatis+db的配置</strong><br>
+(1)配置mybatis : mybatis-config.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;!DOCTYPE configuration PUBLIC &quot;-//mybatis.org//DTD Config 3.0//EN&quot;  &quot;http://mybatis.org/dtd/mybatis-3-config.dtd&quot;&gt;
+
+&lt;configuration&gt;
+//配置分页插件
+    &lt;plugins&gt;
+        &lt;plugin interceptor=&quot;com.github.pagehelper.PageInterceptor&quot;&gt;&lt;/plugin&gt;
+    &lt;/plugins&gt;
+&lt;/configuration&gt;
+</code></pre>
+<p><code>关于mybatis-config.xml</code><br>
+&lt; configuration &gt;：声明在标签里面的信息是配置信息</p>
+<p>&lt; typeAliases&gt;：声明在该标签里面的信息是一个个的别名</p>
+<p>&lt; typealias&gt;：声明要使用别名的对象（全路径）用java注解的话可以使用@Alias注解声明<br>
+&lt; environments&gt;：声明在该标签内的环境变量，default表示默认的环境变量，一个environment表示一个jdbc连接数据库，如果有很多数据库的话我们要用到不同的环境变量</p>
+<p>&lt; environment&gt;：声明环境变量</p>
+<p>&lt; transactionManager&gt;：声明事务管理器      它的类型（type）有：JDBC（基于jdbc的事务） 还有 MANAGED（托管的事务）</p>
+<p>&lt; dataSource&gt;：声明数据源，数据源的类型有NOPOOLED ，POOLED ，还有JIDN，在数据量少的话用ONPOOLED，测试和开发过程一般用POOLED，实际运行使用JIDN</p>
+<p>&lt; property&gt;：jdbc连接的一些属性</p>
+<p>&lt; mappers &gt;：声明我们定义的一个个Mapper类，或者说是关联</p>
+<p>&lt; mapper&gt;：声明Mapper的路径</p>
+<p>(2)配置Spring Dao层 : spring-dao.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.1.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd&quot;&gt;
+
+&lt;!-- 读取db.properties文件--&gt;
+&lt;context:property-placeholder location=&quot;classpath:db.properties&quot;/&gt;
+
+&lt;!-- 配置连接源 --&gt;
+&lt;bean id=&quot;dataSource&quot; class=&quot;com.alibaba.druid.pool.DruidDataSource&quot;&gt;
+	&lt;property name=&quot;driverClassName&quot; value=&quot;${driver}&quot;&gt;&lt;/property&gt;
+	&lt;property name=&quot;url&quot; value=&quot;${url}&quot;&gt;&lt;/property&gt;
+	&lt;property name=&quot;username&quot; value=&quot;${user}&quot;&gt;&lt;/property&gt;
+	&lt;property name=&quot;password&quot; value=&quot;${pwd}&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 配置连接工厂 --&gt;
+&lt;bean id=&quot;sqlSessionFactory&quot; class=&quot;org.mybatis.spring.SqlSessionFactoryBean&quot;&gt;
+        &lt;!-- 设置数据源 --&gt;
+	&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+	&lt;!-- 设置mybatis核心文件 --&gt;
+    &lt;property name=&quot;configLocation&quot; value=&quot;classpath:mybatis-config.xml&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 扫描mapper接口 --&gt;
+&lt;bean id=&quot;mapperScanner&quot; class=&quot;org.mybatis.spring.mapper.MapperScannerConfigurer&quot;&gt;
+	&lt;property name=&quot;basePackage&quot; value=&quot;cn.zx.mapper&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+</code></pre>
+<!-- more -->
+<p>(5)配置Service层 : spring-service.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:tx=&quot;http://www.springframework.org/schema/tx&quot;
+    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd
+        http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.1.xsd&quot;&gt;
+
+&lt;!-- 开启spring的注解扫描 --&gt;
+&lt;context:component-scan base-package=&quot;cn.zx.Service&quot;&gt;&lt;/context:component-scan&gt;
+
+&lt;!-- 配置事务管理 --&gt;
+&lt;bean id=&quot;transactionManager&quot; class=&quot;org.springframework.jdbc.datasource.DataSourceTransactionManager&quot;&gt;
+	&lt;property name=&quot;dataSource&quot; ref=&quot;dataSource&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+ 
+&lt;tx:annotation-driven transaction-manager=&quot;transactionManager&quot;/&gt;
+</code></pre>
+<p>(6)配置SpringMVC : springmvc.xml</p>
+<pre><code>&lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&gt;
+&lt;beans xmlns=&quot;http://www.springframework.org/schema/beans&quot;
+    xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+    xmlns:aop=&quot;http://www.springframework.org/schema/aop&quot;
+    xmlns:context=&quot;http://www.springframework.org/schema/context&quot;
+    xmlns:mvc=&quot;http://www.springframework.org/schema/mvc&quot;
+    xsi:schemaLocation=&quot;http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+        http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-3.2.xsd&quot;&gt;
+
+&lt;!-- 配置Controller扫描 --&gt;
+&lt;context:component-scan base-package=&quot;cn.zx.Controller&quot;&gt;&lt;/context:component-scan&gt;
+
+&lt;!-- 配置注解驱动 --&gt;
+&lt;mvc:annotation-driven&gt;
+	&lt;mvc:message-converters&gt;
+		&lt;ref bean =&quot;stringHttpMessageConverter&quot;/&gt;
+	&lt;/mvc:message-converters&gt;
+&lt;/mvc:annotation-driven&gt;
+
+&lt;!-- 配置消息转换器 --&gt;
+&lt;bean id=&quot;stringHttpMessageConverter&quot; class=&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;&gt;
+	&lt;property name=&quot;supportedMediaTypes&quot;&gt;
+		&lt;list&gt;
+			&lt;value&gt;text/html;charset=utf-8&lt;/value&gt;
+		&lt;/list&gt;
+	&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 配置视图解析器 --&gt;
+&lt;bean class=&quot;org.springframework.web.servlet.view.InternalResourceViewResolver&quot;&gt;
+	&lt;!-- 前缀 --&gt;
+	&lt;property name=&quot;prefix&quot; value=&quot;/WEB-INF/jsp/&quot;&gt;&lt;/property&gt;
+	&lt;!-- 后缀 --&gt;
+	&lt;property name=&quot;suffix&quot; value=&quot;.jsp&quot;&gt;&lt;/property&gt;
+&lt;/bean&gt;
+
+&lt;!-- 资源映射器 --&gt;
+&lt;mvc:resources location=&quot;/cpts/&quot; mapping=&quot;/cpts/**&quot;&gt;&lt;/mvc:resources&gt;
+</code></pre>
+<p>(7)配置db.properties<br>
+driver=com.mysql.jdbc.Driver<br>
+url=jdbc:mysql://127.0.0.1:3306/ssm-alipay<br>
+user=root<br>
+pwd=123456<br>
+<code>解决数据库乱码在url后面加?characterEncoding=utf-8</code></p>
+<p>5.Controller</p>
+
+              </div>
+              <div class="toc-container">
+                
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://wh1te5old.GitHub.io/post/java-lian-xi-ti/">
+              <h3 class="post-title">
+                Java练习题
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  by GitHub
+  <a class="rss" href="https://wh1te5old.GitHub.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>
