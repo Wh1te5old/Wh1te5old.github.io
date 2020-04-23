@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
     <id>https://wh1te5old.GitHub.io</id>
     <title>Wh1te5old</title>
-    <updated>2020-04-23T04:46:19.628Z</updated>
+    <updated>2020-04-23T14:27:52.281Z</updated>
     <generator>https://github.com/jpmonette/feed</generator>
     <link rel="alternate" href="https://wh1te5old.GitHub.io"/>
     <link rel="self" href="https://wh1te5old.GitHub.io/atom.xml"/>
@@ -16,7 +16,7 @@
         <link href="https://wh1te5old.GitHub.io/post/da-jian-yi-ge-ssm-kuang-jia/">
         </link>
         <updated>2020-04-23T01:29:09.000Z</updated>
-        <summary type="html"><![CDATA[<p><code>搭建这个框会用10分钟或更多的时间,如果那个地方忘写了,写错了,等程序跑起来报错很痛苦.我自己也经常出错和忘记步骤,所以我在这里把搭建步骤写下来.</code></p>
+        <summary type="html"><![CDATA[<p><code>搭建这个框架会用10分钟或更多的时间,如果那个地方忘写了,写错了,等程序跑起来报错很痛苦.我自己也经常出错和忘记步骤,所以我在这里把搭建步骤写下来.</code></p>
 <p>开发工具 : eclipse 2017<br>
 数据库 : mysql5.6<br>
 项目结构 : maven<br>
@@ -26,7 +26,7 @@ Windows10系统</p>
 <img src="https://wh1te5old.GitHub.io/post-images/1587607624789.PNG" alt="" loading="lazy"><br>
 <code>如果项目像图中这样报错的话,右键点击项目,选择Java EE tools,点第二个Generate Depolyment Descriptor Stub,自动生成webapp下的WEB-INF文件夹和web.xml文件</code></p>
 ]]></summary>
-        <content type="html"><![CDATA[<p><code>搭建这个框会用10分钟或更多的时间,如果那个地方忘写了,写错了,等程序跑起来报错很痛苦.我自己也经常出错和忘记步骤,所以我在这里把搭建步骤写下来.</code></p>
+        <content type="html"><![CDATA[<p><code>搭建这个框架会用10分钟或更多的时间,如果那个地方忘写了,写错了,等程序跑起来报错很痛苦.我自己也经常出错和忘记步骤,所以我在这里把搭建步骤写下来.</code></p>
 <p>开发工具 : eclipse 2017<br>
 数据库 : mysql5.6<br>
 项目结构 : maven<br>
