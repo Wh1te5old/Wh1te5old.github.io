@@ -2,22 +2,19 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Wh1te5old</title>
+<title>Java基础2 | Wh1te5old</title>
 <link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1587717903733">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Java基础2 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="您好,欢迎来到我的个人站🙋‍♂
-我在这里记录关于编程的内容,一是方便复习,二是为了分享给对编程感兴趣的人😃
-如果发现有任何问题请联系我🤝谢谢
-QQ:2251612642
-邮箱:wh1te5old@163.com
-..." />
-    <meta name="keywords" content="关于" />
+    <meta name="description" content="1.字符串的处理
+(1)字符串的创建
+在Java语言中字符串必须包含在一对双引号（&quot; &quot;）之内。字符串是由许多个字符连接而成的。例如：&quot;23.23&quot;、&quot;ABCDE&quot;、&quot;你..." />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -79,31 +76,47 @@ QQ:2251612642
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              Java基础2
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2020-04-24
               </span>
               <span>
-                1 min read
+                3 min read
               </span>
-              
-                <a href="https://wh1te5old.GitHub.io/tag/b-flGYGCf/" class="post-tag">
-                  # 关于
-                </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://wh1te5old.GitHub.io/post-images/about.jpg" alt="">
-            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>您好,欢迎来到我的个人站🙋‍♂<br>
-我在这里记录关于编程的内容,一是方便复习,二是为了分享给对编程感兴趣的人😃</p>
-<p>如果发现有任何问题请联系我🤝谢谢<br>
-QQ:2251612642<br>
-邮箱:wh1te5old@163.com</p>
+                <p><strong>1.字符串的处理</strong><br>
+(1)字符串的创建<br>
+在Java语言中字符串必须包含在一对双引号（&quot; &quot;）之内。字符串是由许多个字符连接而成的。例如：&quot;23.23&quot;、&quot;ABCDE&quot;、&quot;你好&quot;。这些都是字符串常量，字符串常量是系统能够显示的任何文字信息，甚至是单个字符。<br>
+<code>注意在Java中由双引号包围的都是字符串，不能作为其他数据类型来使用，例如&quot;1+2&quot;的输出结果永远也不会是3。</code><br>
+<code>语法：String str=[null]</code><br>
+在Java语言中将字符串作为对象来管理，因此可以像创建其他类对象一样来创建字符串对象。创建对象要使用类的构造方法。下面介绍String类的常用构造方法。<br>
+<code>方法声明：public String(char arr[])</code><br>
+<img src="https://wh1te5old.GitHub.io/post-images/1587699799532.PNG" alt="" loading="lazy"><br>
+方法声明：public String(char arr[], int offset, int length)参数说明：arr是包含一些字符的数组，参数offset表示开始截取字符串的位置，length表示截取字符串的长度。例如下列代码将提取字符数组a中的一部分创建一个字符串对象。</p>
+<p>(2)连接字符串<br>
+<code>使用“+”运算符可完成对多个字符串连接的功能。“+”运算符可以连接多个运算符并产生一个String对象。</code><img src="https://wh1te5old.GitHub.io/post-images/1587700053529.PNG" alt="" loading="lazy"><br>
+Java中一句相连的字符串不能分开在两行中写。<br>
+注意只要“+”运算符的一个操作数是字符串，编译器就会将另一个操作数转换成字符串形式，所以应谨慎地将其他数据类型与字符串相连。以免输出意想不到的结果,运算符是有优先级的，圆括号的优先级最高，所以先被执行，然后再将结果与字符串相连。</p>
+<p>(3)获取字符串信息<br>
+获取字符串长度:public String length();<br>
+字符串查找 : indexOf(String s)该方法用于返回参数字符串s在指定字符串中首次出现的索引位置。当调用字符串的indexOf()方法时，会从当前字符串的开始位置搜索s的位置；如果没有检索到字符串s，该方法返回值是−1。</p>
+<p>(4)格式化<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1587700930024.PNG" alt="" loading="lazy"></p>
+<pre><code>       //日期格式化
+	Date date = new Date();
+	String now = String.format(&quot;%tF&quot;, date);
+	String now1 = String.format(&quot;%tD&quot;, date);
+	System.out.println(&quot;年-月-日:&quot;+now);
+	System.out.println(&quot;月/日/年:&quot;+now1);
+
+    常规格式化
+    ![](https://wh1te5old.GitHub.io/post-images/1587701603029.PNG)</code></pre>
 
               </div>
               <div class="toc-container">
@@ -113,6 +126,15 @@ QQ:2251612642<br>
           </article>
         </div>
 
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://wh1te5old.GitHub.io/post/da-jian-yi-ge-ssm-kuang-jia/">
+              <h3 class="post-title">
+                搭建一个SSM框架
+              </h3>
+            </a>
+          </div>
         
 
         
