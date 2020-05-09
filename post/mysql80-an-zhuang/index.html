@@ -1,0 +1,234 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Mysql8.0安装 | Wh1te5old</title>
+<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1589013982639">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="Mysql8.0安装 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="记录mysql8.0安装和修改密码
+1.下载mysql8.0
+2.新建my.ini文件并加入以下
+[ mysqld ]
+设置3306端口
+port=3306
+设置mysql的安装目录
+basedir=&quot;E:\mysql-8.0.1..." />
+    <meta name="keywords" content="Mysql" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://wh1te5old.GitHub.io">
+  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1589013982639" alt="">
+  </a>
+  <h1 class="site-title">
+    Wh1te5old
+  </h1>
+  <p class="site-description">
+    花有重开日 人无再少年
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="https://wh1te5old.GitHub.io/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://wh1te5old.GitHub.io/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              Mysql8.0安装
+            </h2>
+            <div class="post-info">
+              <span>
+                2017-05-09
+              </span>
+              <span>
+                2 min read
+              </span>
+              
+                <a href="https://wh1te5old.GitHub.io/tag/SkoNwHItQ/" class="post-tag">
+                  # Mysql
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://wh1te5old.GitHub.io/post-images/mysql80-an-zhuang.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <p>记录mysql8.0安装和修改密码</p>
+<h1 id="1下载mysql80">1.下载mysql8.0</h1>
+<h1 id="2新建myini文件并加入以下">2.新建my.ini文件并加入以下</h1>
+<p>[ mysqld ]</p>
+<h1 id="设置3306端口">设置3306端口</h1>
+<p>port=3306</p>
+<h1 id="设置mysql的安装目录">设置mysql的安装目录</h1>
+<p>basedir=&quot;E:\mysql-8.0.19&quot;</p>
+<h1 id="设置mysql数据库的数据的存放目录">设置mysql数据库的数据的存放目录</h1>
+<p>datadir=&quot;E:\mysql-8.0.19\Data&quot;</p>
+<h1 id="允许最大连接数">允许最大连接数</h1>
+<p>max_connections=200</p>
+<h1 id="允许连接失败的次数">允许连接失败的次数。</h1>
+<p>max_connect_errors=10</p>
+<h1 id="服务端使用的字符集默认为utf8mb4">服务端使用的字符集默认为utf8mb4</h1>
+<p>character-set-server=utf8mb4</p>
+<h1 id="创建新表时将使用的默认存储引擎">创建新表时将使用的默认存储引擎</h1>
+<p>default-storage-engine=INNODB</p>
+<h1 id="默认使用mysql_native_password插件认证">默认使用“mysql_native_password”插件认证</h1>
+<p>#mysql_native_password<br>
+default_authentication_plugin=mysql_native_password<br>
+[mysql]</p>
+<h1 id="设置mysql客户端默认字符集">设置mysql客户端默认字符集</h1>
+<p>default-character-set=utf8mb4<br>
+[client]</p>
+<h1 id="设置mysql客户端连接服务端时默认使用的端口">设置mysql客户端连接服务端时默认使用的端口</h1>
+<p>port=3306<br>
+default-character-set=utf8mb4</p>
+<p><code>注意:basedir和datadir里面写自己的路径</code></p>
+<h1 id="3配置环境变量">3.配置环境变量</h1>
+<p>(1)新建系统变量<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1589013340711.png" alt="" loading="lazy"><br>
+(2)在系统变量的path中加入下图的最后一行<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1589013415784.png" alt="" loading="lazy"></p>
+<h1 id="4初始化mysql并登录">4.初始化mysql并登录</h1>
+<p>(1)用管理员身份打开cmd,然后进到mysql文件夹里的bin目录,输入mysqld --initialize --console,如果成功会出现一个初始密码.<br>
+(2)安装MySQL服务：mysqld --install<br>
+(3)登陆数据库并输入初始密码: mysql -u root -p<br>
+(4)进入数据库修改root账号密码,输入:ALTER USER 'root'@'localhost' IDENTIFIED WITH mysql_native_password BY '你的密码';<br>
+(5)使用navicat远程连接mysql<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1589013878976.PNG" alt="" loading="lazy"></p>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#1%E4%B8%8B%E8%BD%BDmysql80">1.下载mysql8.0</a></li>
+<li><a href="#2%E6%96%B0%E5%BB%BAmyini%E6%96%87%E4%BB%B6%E5%B9%B6%E5%8A%A0%E5%85%A5%E4%BB%A5%E4%B8%8B">2.新建my.ini文件并加入以下</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AE3306%E7%AB%AF%E5%8F%A3">设置3306端口</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AEmysql%E7%9A%84%E5%AE%89%E8%A3%85%E7%9B%AE%E5%BD%95">设置mysql的安装目录</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AEmysql%E6%95%B0%E6%8D%AE%E5%BA%93%E7%9A%84%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E6%94%BE%E7%9B%AE%E5%BD%95">设置mysql数据库的数据的存放目录</a></li>
+<li><a href="#%E5%85%81%E8%AE%B8%E6%9C%80%E5%A4%A7%E8%BF%9E%E6%8E%A5%E6%95%B0">允许最大连接数</a></li>
+<li><a href="#%E5%85%81%E8%AE%B8%E8%BF%9E%E6%8E%A5%E5%A4%B1%E8%B4%A5%E7%9A%84%E6%AC%A1%E6%95%B0">允许连接失败的次数。</a></li>
+<li><a href="#%E6%9C%8D%E5%8A%A1%E7%AB%AF%E4%BD%BF%E7%94%A8%E7%9A%84%E5%AD%97%E7%AC%A6%E9%9B%86%E9%BB%98%E8%AE%A4%E4%B8%BAutf8mb4">服务端使用的字符集默认为utf8mb4</a></li>
+<li><a href="#%E5%88%9B%E5%BB%BA%E6%96%B0%E8%A1%A8%E6%97%B6%E5%B0%86%E4%BD%BF%E7%94%A8%E7%9A%84%E9%BB%98%E8%AE%A4%E5%AD%98%E5%82%A8%E5%BC%95%E6%93%8E">创建新表时将使用的默认存储引擎</a></li>
+<li><a href="#%E9%BB%98%E8%AE%A4%E4%BD%BF%E7%94%A8mysql_native_password%E6%8F%92%E4%BB%B6%E8%AE%A4%E8%AF%81">默认使用“mysql_native_password”插件认证</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AEmysql%E5%AE%A2%E6%88%B7%E7%AB%AF%E9%BB%98%E8%AE%A4%E5%AD%97%E7%AC%A6%E9%9B%86">设置mysql客户端默认字符集</a></li>
+<li><a href="#%E8%AE%BE%E7%BD%AEmysql%E5%AE%A2%E6%88%B7%E7%AB%AF%E8%BF%9E%E6%8E%A5%E6%9C%8D%E5%8A%A1%E7%AB%AF%E6%97%B6%E9%BB%98%E8%AE%A4%E4%BD%BF%E7%94%A8%E7%9A%84%E7%AB%AF%E5%8F%A3">设置mysql客户端连接服务端时默认使用的端口</a></li>
+<li><a href="#3%E9%85%8D%E7%BD%AE%E7%8E%AF%E5%A2%83%E5%8F%98%E9%87%8F">3.配置环境变量</a></li>
+<li><a href="#4%E5%88%9D%E5%A7%8B%E5%8C%96mysql%E5%B9%B6%E7%99%BB%E5%BD%95">4.初始化mysql并登录</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://wh1te5old.GitHub.io/post/taotao-xiang-mu/">
+              <h3 class="post-title">
+                taotao项目
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  by GitHub
+  <a class="rss" href="https://wh1te5old.GitHub.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

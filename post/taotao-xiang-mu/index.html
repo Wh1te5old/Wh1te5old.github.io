@@ -2,20 +2,21 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>面试题 | Wh1te5old</title>
+<title>taotao项目 | Wh1te5old</title>
 <link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1589013982639">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="面试题 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="taotao项目 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="1.它的排序方法类似于冒泡动作，所以起名为冒泡排序法。另外，这也是学校考试和公司面试的常见考题。对于学习程序算法来说冒泡排序是一个很好的入门题目。
-题目:创建数组,使用冒泡排序给数组从小到大排序
-
-	int num[] = new int[..." />
-    <meta name="keywords" content="Java" />
+    <meta name="description" content="记录taotao商城项目
+1.项目结构
+1.1.创建父工程
+创建taotao-parent项目,为pom项目,项目结构很简单,主要是pom文件.在pom文件使用指定依赖版本的&lt; dependencyManagement&gt;标签.
+..." />
+    <meta name="keywords" content="SSM,Java" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -77,15 +78,19 @@
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              面试题
+              taotao项目
             </h2>
             <div class="post-info">
               <span>
-                2020-04-21
+                2017-05-04
               </span>
               <span>
                 2 min read
               </span>
+              
+                <a href="https://wh1te5old.GitHub.io/tag/M64LxckiZ/" class="post-tag">
+                  # SSM
+                </a>
               
                 <a href="https://wh1te5old.GitHub.io/tag/tAoOQ7gYF/" class="post-tag">
                   # Java
@@ -93,64 +98,49 @@
               
             </div>
             
-              <img class="post-feature-image" src="https://wh1te5old.GitHub.io/post-images/java-lian-xi-ti.jpg" alt="">
+              <img class="post-feature-image" src="https://wh1te5old.GitHub.io/post-images/taotao-xiang-mu.jpg" alt="">
             
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>1.它的排序方法类似于冒泡动作，所以起名为冒泡排序法。另外，这也是学校考试和公司面试的常见考题。对于学习程序算法来说冒泡排序是一个很好的入门题目。<br>
-<strong>题目:创建数组,使用冒泡排序给数组从小到大排序</strong></p>
-<!-- more -->
-<pre><code>	int num[] = new int[]{9,6,3,5,1,2,4,7,8};	//创建数组
-	System.out.print(&quot;排序前:&quot;);					//输出排序前数组
-	for (int i = 0; i &lt; num.length; i++) {
-	System.out.print(num[i]+&quot;,&quot;);
-	}
-	
-	for (int i = num.length-1; i &gt; 0; i--) {	//十个数据比较次数应该为9次,所以i的值应该是num.length-1,每次循环比较完,最大数就不用比较了,所以i--
-		for (int j = 0; j &lt; i; j++) {
-			if (num[j] &gt; num[j+1]) {			//条件:前面的数比后面数大
-			    int temp = num[j];			    //将前面的值复制给temp变量
-			    num[j] = num[j+1];				//将后面的值赋值给前面的
-			    num[j+1] = temp;				//将temp赋值给后面的数
-			}
-					
-		}
-	}
-	
-	System.out.print(&quot;\n排序后:&quot;);				//输出排序后数组
-	for (int i = 0; i &lt; num.length; i++) {
-	System.out.print(num[i]+&quot;,&quot;);
-	}
-</code></pre>
-<!-- more -->
-<p><strong>题目: 99乘法表</strong></p>
-<pre><code>for (int i = 1; i &lt;= 9; i++) {			//外层循环控制行数
-	for (int j = 1; j &lt;= i; j++) {		//内层循环控制列
-		    String str = j+&quot;*&quot;+i+&quot;=&quot;+j*i;	//把表达式和运算结果赋值给str
-			System.out.print(str+&quot;\t&quot;);		//输出
-}
-			System.out.println();				//换行
-}
-</code></pre>
-<!-- more -->
+                <p>记录taotao商城项目</p>
+<h1 id="1项目结构">1.项目结构</h1>
+<p>1.1.创建父工程<br>
+创建taotao-parent项目,为pom项目,项目结构很简单,主要是pom文件.在pom文件使用指定依赖版本的&lt; dependencyManagement&gt;标签.<br>
+指定依赖版本有两种方式,一种是直接在&lt; dependencyManagement&gt;标签中直接指定,在最上面指定版本,<br>
+在&lt; dependencyManagement&gt;标签里引用</p>
+<p>1.2.创建common和manager子工程<br>
+(1)common<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1589010610421.PNG" alt="" loading="lazy"><br>
+作用主要是放工具类<br>
+(2)manager<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1589010823973.PNG" alt="" loading="lazy"><br>
+作为dao.pojo.service.web的父项目</p>
+<p>1.3.创建dao.pojo.service.web子项目<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1589011003419.PNG" alt="" loading="lazy"><br>
+(1)pojo,主要放实体类,jar项目,不需要任何依赖<br>
+(2)dao,主要放mapper接口和mapper.xml文件,jar项目,需要引用pojo项目并导入需要的依赖<br>
+(3)service,业务逻辑代码,jar项目,引用dao项目并导入需要的依赖<br>
+(4)web,处理请求并返回数据,引用service项目,必须为war项目并配置spring和mvc和web.xml.<code>运行项目</code></p>
+<h1 id="2遇到的问题">2.遇到的问题</h1>
+<p><code>2.1.没有使用mysql8.0,驱动无效,无报错.出错前是用的mysql5.6</code><br>
+解决:参考文章:mysql8.0安装,安装后使用com.mysql.cj.jdbc.Driver的驱动,并在url后面加上?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true&amp;serverTimezone=Asia/Shanghai,修改mybatis逆向工程xml文件里的url,加入&lt; property name=&quot;nullCatalogMeansCurrent&quot; value=&quot;true&quot;/&gt;</p>
+<p><code>2.2.在eclipse里新建的一个空间里写taotao项目,tomcat启动时报错</code><br>
+报错:Caused by: java.util.zip.ZipException: invalid LOC header (bad signature)<br>
+解决:目前没解决<br>
+分析:可能是新建的空间的一些配置没有配好,或者jar包冲突</p>
 
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li><a href="#1%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">1.项目结构</a></li>
+<li><a href="#2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">2.遇到的问题</a></li>
+</ul>
+
               </div>
             </div>
           </article>
         </div>
 
-        
-          <div class="next-post">
-            <div class="next">下一篇</div>
-            <a href="https://wh1te5old.GitHub.io/post/java-ji-chu-pian/">
-              <h3 class="post-title">
-                Java基础第一篇
-              </h3>
-            </a>
-          </div>
         
 
         
