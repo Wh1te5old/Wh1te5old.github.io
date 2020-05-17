@@ -1,0 +1,403 @@
+<html>
+  <head>
+    <meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>工具类 | Wh1te5old</title>
+<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1589704013590">
+<link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
+<link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
+<link rel="alternate" type="application/atom+xml" title="工具类 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
+
+
+
+    <meta name="description" content="1.RictureResult.java  作用:传入完整的上传路径(url+时间文件路径+生成的图片名称),然后返回结果
+
+package tao.zx.taotao.common.utils;
+/**
+* 上传图片返回值
+* &lt;p..." />
+    <meta name="keywords" content="工具类" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
+    <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
+  </head>
+  <body>
+    <div class="main">
+      <div class="main-content">
+        <div class="site-header">
+  <a href="https://wh1te5old.GitHub.io">
+  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1589704013590" alt="">
+  </a>
+  <h1 class="site-title">
+    Wh1te5old
+  </h1>
+  <p class="site-description">
+    鹰击长空  鱼翔浅底
+  </p>
+  <div class="menu-container">
+    
+      
+        <a href="/" class="menu">
+          首页
+        </a>
+      
+    
+      
+        <a href="/archives" class="menu">
+          归档
+        </a>
+      
+    
+      
+        <a href="https://wh1te5old.GitHub.io/tags" class="menu">
+          标签
+        </a>
+      
+    
+      
+        <a href="https://wh1te5old.GitHub.io/post/about" class="menu">
+          关于
+        </a>
+      
+    
+  </div>
+  <div class="social-container">
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+  </div>
+</div>
+
+        <div class="post-detail">
+          <article class="post">
+            <h2 class="post-title">
+              工具类
+            </h2>
+            <div class="post-info">
+              <span>
+                2018-05-17
+              </span>
+              <span>
+                5 min read
+              </span>
+              
+                <a href="https://wh1te5old.GitHub.io/tag/rWkMJ_T-X/" class="post-tag">
+                  # 工具类
+                </a>
+              
+            </div>
+            
+              <img class="post-feature-image" src="https://wh1te5old.GitHub.io/post-images/gong-ju-lei.jpg" alt="">
+            
+            <div class="post-content-wrapper">
+              <div class="post-content">
+                <h1 id="1rictureresultjava-作用传入完整的上传路径url时间文件路径生成的图片名称然后返回结果">1.RictureResult.java  作用:传入完整的上传路径(url+时间文件路径+生成的图片名称),然后返回结果</h1>
+<!-- more -->
+<pre><code>package tao.zx.taotao.common.utils;
+/**
+* 上传图片返回值
+* &lt;p&gt;Title: PictureResult&lt;/p&gt;
+* &lt;p&gt;Description: &lt;/p&gt;
+* &lt;p&gt;Company: www.itcast.com&lt;/p&gt;
+* @author   入云龙
+* @date  2015年7月22日下午2:09:02
+* @version 1.0
+*/
+public class PictureResult {
+/**
+    * 上传图片返回值，成功：0  失败：1   
+    */
+private Integer error;
+/**
+    * 回显图片使用的url
+    */
+private String url;
+/**
+    * 错误时的错误消息
+    */
+private String message;
+public PictureResult(Integer state,  String url) {
+    this.url = url;
+    this.error = state;
+}
+public PictureResult(Integer state,  String url, String errorMessage) {
+    this.url = url;
+    this.error = state;
+    this.message = errorMessage;
+}
+public Integer getError() {
+    return error;
+}
+public void setError(Integer error)  {
+    this.error = error;
+}
+public String getUrl() {
+    return url;
+}
+public void setUrl(String url) {
+    this.url = url;
+}
+public String getMessage() {
+    return message;
+}
+public void setMessage(String  message) {
+    this.message = message;
+}
+@Override
+public String toString() {
+    return &quot;PictureResult [error=&quot; +  error + &quot;, url=&quot; + url + &quot;, message=&quot;  + message + &quot;]&quot;;
+}
+
+public static PictureResult  ok(String url) {
+    return new PictureResult(0,  url);
+}
+
+public static PictureResult error()  {
+    return new PictureResult(1, &quot;&quot;);
+}
+}
+</code></pre>
+<!-- more -->
+<h1 id="2idutilsjava-作用各种id生成方法-如图片名称商品id">2.IDUtils.java  作用:各种ID生成方法 如:图片名称,商品ID</h1>
+<!-- more -->
+<pre><code>package tao.zx.taotao.common.utils;
+import java.util.Calendar;
+import java.util.Random;
+/**
+* 各种id生成策略
+* &lt;p&gt;Title: IDUtils&lt;/p&gt;
+* &lt;p&gt;Description: &lt;/p&gt;
+* &lt;p&gt;Company: www.itcast.com&lt;/p&gt;
+* @author    入云龙
+* @date    2015年7月22日下午2:32:10
+* @version 1.0
+*/
+public class IDUtils {
+    /**
+    * 图片名生成
+    */
+    public static String genImageName() {
+        //取当前时间的长整形值包含毫秒
+        long millis = System.currentTimeMillis();
+        //long millis = System.nanoTime();
+        //加上三位随机数
+        Random random = new Random();
+        int end3 = random.nextInt(999);
+        //如果不足三位前面补0
+        String str = millis + String.format(&quot;%03d&quot;, end3);
+        
+        return str;
+    }
+    
+    /**
+    * 商品id生成
+    */
+    public static long genItemId() {
+        //取当前时间的长整形值包含毫秒
+        long millis = System.currentTimeMillis();
+        //long millis = System.nanoTime();
+        //加上两位随机数
+        Random random = new Random();
+        int end2 = random.nextInt(99);
+        //如果不足两位前面补0
+        String str = millis + String.format(&quot;%02d&quot;, end2);
+        long id = new Long(str);
+        return id;
+    }
+    public static String getFilePath() {
+        Calendar calendar = Calendar.getInstance(); //获取当前时间
+        int year = calendar.get(Calendar.YEAR); //获取年
+        int month = calendar.get(Calendar.MONTH)+1; //获取月
+        int date = calendar.get(Calendar.DATE);  //获取日
+        return year+&quot;/&quot;+month+&quot;/&quot;+date+&quot;/&quot;;
+    }
+    
+    /*
+    * public static void main(String[] args) { for(int i=0;i&lt; 100;i++)
+    * System.out.println(genItemId()); }
+    */
+}
+</code></pre>
+<!-- more -->
+<h1 id="3sftputilsjava-作用sftp图片上传">3.SFTpUtils.java   作用:SFTP图片上传</h1>
+<!-- more -->
+<pre><code>package tao.zx.taotao.common.utils;
+import java.io.InputStream;
+import java.util.Properties;
+import com.jcraft.jsch.Channel;
+import com.jcraft.jsch.ChannelSftp;
+import com.jcraft.jsch.JSch;
+import com.jcraft.jsch.JSchException;
+import com.jcraft.jsch.Session;
+import com.jcraft.jsch.SftpATTRS;
+import com.jcraft.jsch.SftpException;
+public class SFtpUtils {
+    static Session session = null;
+    static Channel channel = null;
+    //建立连接
+    public static ChannelSftp getChannel(String hostname, int port, String username, String password, int timeout)
+            throws JSchException {
+        JSch jsch = new JSch(); // 创建JSch对象
+        session = jsch.getSession(username, hostname, port); // 根据用户名，主机ip，端口获取一个Session对象
+        session.setPassword(password); // 设置密码
+        
+        //设置不进行秘钥检查
+        Properties config = new Properties();
+        config.put(&quot;StrictHostKeyChecking&quot;, &quot;no&quot;);
+        session.setConfig(config); // 为Session对象设置properties
+        
+        session.setTimeout(timeout); // 设置timeout时间
+        session.connect(); // 通过Session建立链接
+        channel = session.openChannel(&quot;sftp&quot;); // 打开SFTP通道
+        channel.connect(); // 建立SFTP通道的连接
+        return (ChannelSftp) channel;
+    }
+    //关闭连接
+    public static void closeChannel() throws Exception {
+        if (channel != null) {
+            channel.disconnect();
+        }
+        if (session != null) {
+            session.disconnect();
+        }
+    }
+    
+    //上传文件
+    public static void uploadFile(String hostname, int port, String username, String password, int timeout,
+            InputStream input, String filePath, String fileName) throws Exception {
+        ChannelSftp con = getChannel(hostname, port, username, password, timeout);
+        createDir(filePath, con);
+        con.put(input, filePath+fileName);
+        closeChannel();
+    }
+    //创建文件夹
+    public static void createDir(String createpath, ChannelSftp sftp) {
+        try {
+            if (isDirExist(createpath, sftp)) {
+                sftp.cd(createpath);
+                return;
+            }
+            String pathArry[] = createpath.split(&quot;/&quot;);
+            StringBuffer filePath = new StringBuffer(&quot;/&quot;);
+            for (String path : pathArry) {
+                if (path.equals(&quot;&quot;)) {
+                    continue;
+                }
+                filePath.append(path + &quot;/&quot;);
+                if (isDirExist(filePath.toString(), sftp)) {
+                    sftp.cd(filePath.toString());
+                } else {
+                    // 建立目录
+                    sftp.mkdir(filePath.toString());
+                    // 进入并设置为当前目录
+                    sftp.cd(filePath.toString());
+                }
+            }
+                sftp.cd(createpath);
+        } catch (SftpException e) {
+            
+        }
+    }
+    //判断文件夹是否存在
+    public static boolean isDirExist(String directory, ChannelSftp sftp) {
+        boolean isDirExistFlag = false;
+        try {
+            SftpATTRS sftpATTRS = sftp.lstat(directory);
+            isDirExistFlag = true;
+            return sftpATTRS.isDir();
+        } catch (Exception e) {
+            if (e.getMessage().toLowerCase().equals(&quot;no such file&quot;)) {
+                isDirExistFlag = false;
+            }
+        }
+        return isDirExistFlag;
+    }
+}
+</code></pre>
+
+              </div>
+              <div class="toc-container">
+                <ul class="markdownIt-TOC">
+<li><a href="#1rictureresultjava-%E4%BD%9C%E7%94%A8%E4%BC%A0%E5%85%A5%E5%AE%8C%E6%95%B4%E7%9A%84%E4%B8%8A%E4%BC%A0%E8%B7%AF%E5%BE%84url%E6%97%B6%E9%97%B4%E6%96%87%E4%BB%B6%E8%B7%AF%E5%BE%84%E7%94%9F%E6%88%90%E7%9A%84%E5%9B%BE%E7%89%87%E5%90%8D%E7%A7%B0%E7%84%B6%E5%90%8E%E8%BF%94%E5%9B%9E%E7%BB%93%E6%9E%9C">1.RictureResult.java  作用:传入完整的上传路径(url+时间文件路径+生成的图片名称),然后返回结果</a></li>
+<li><a href="#2idutilsjava-%E4%BD%9C%E7%94%A8%E5%90%84%E7%A7%8Did%E7%94%9F%E6%88%90%E6%96%B9%E6%B3%95-%E5%A6%82%E5%9B%BE%E7%89%87%E5%90%8D%E7%A7%B0%E5%95%86%E5%93%81id">2.IDUtils.java  作用:各种ID生成方法 如:图片名称,商品ID</a></li>
+<li><a href="#3sftputilsjava-%E4%BD%9C%E7%94%A8sftp%E5%9B%BE%E7%89%87%E4%B8%8A%E4%BC%A0">3.SFTpUtils.java   作用:SFTP图片上传</a></li>
+</ul>
+
+              </div>
+            </div>
+          </article>
+        </div>
+
+        
+          <div class="next-post">
+            <div class="next">下一篇</div>
+            <a href="https://wh1te5old.GitHub.io/post/mysql80-an-zhuang/">
+              <h3 class="post-title">
+                Mysql8.0安装
+              </h3>
+            </a>
+          </div>
+        
+
+        
+
+        <div class="site-footer">
+  by GitHub
+  <a class="rss" href="https://wh1te5old.GitHub.io/atom.xml" target="_blank">
+    <i class="ri-rss-line"></i> RSS
+  </a>
+</div>
+
+      </div>
+    </div>
+
+    <script>
+      hljs.initHighlightingOnLoad()
+
+      let mainNavLinks = document.querySelectorAll(".markdownIt-TOC a");
+
+      // This should probably be throttled.
+      // Especially because it triggers during smooth scrolling.
+      // https://lodash.com/docs/4.17.10#throttle
+      // You could do like...
+      // window.addEventListener("scroll", () => {
+      //    _.throttle(doThatStuff, 100);
+      // });
+      // Only not doing it here to keep this Pen dependency-free.
+
+      window.addEventListener("scroll", event => {
+        let fromTop = window.scrollY;
+
+        mainNavLinks.forEach((link, index) => {
+          let section = document.getElementById(decodeURI(link.hash).substring(1));
+          let nextSection = null
+          if (mainNavLinks[index + 1]) {
+            nextSection = document.getElementById(decodeURI(mainNavLinks[index + 1].hash).substring(1));
+          }
+          if (section.offsetTop <= fromTop) {
+            if (nextSection) {
+              if (nextSection.offsetTop > fromTop) {
+                link.classList.add("current");
+              } else {
+                link.classList.remove("current");    
+              }
+            } else {
+              link.classList.add("current");
+            }
+          } else {
+            link.classList.remove("current");
+          }
+        });
+      });
+
+    </script>
+  </body>
+</html>

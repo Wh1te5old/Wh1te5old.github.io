@@ -3,7 +3,7 @@
   <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>SSM | Wh1te5old</title>
-<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1589612767612">
+<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1589704013590">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="SSM | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://wh1te5old.GitHub.io">
-  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1589612767612" alt="">
+  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1589704013590" alt="">
   </a>
   <h1 class="site-title">
     Wh1te5old
@@ -122,7 +122,7 @@ Windows10系统</p>
           2017-05-04
         </span>
         <span>
-          2 min read
+          6 min read
         </span>
         
           <a href="https://wh1te5old.GitHub.io/tag/M64LxckiZ/" class="post-tag">
@@ -139,7 +139,55 @@ Windows10系统</p>
         </a>
       
       <div class="post-abstract">
-        
+        <p>记录taotao商城项目</p>
+<h1 id="1项目结构">1.项目结构</h1>
+<p>1.1.创建父工程<br>
+创建taotao-parent项目,为pom项目,项目结构很简单,主要是pom文件.在pom文件使用指定依赖版本的&lt; dependencyManagement&gt;标签.<br>
+指定依赖版本有两种方式,一种是直接在&lt; dependencyManagement&gt;标签中直接指定,在最上面指定版本,<br>
+在&lt; dependencyManagement&gt;标签里引用</p>
+<p>1.2.创建common和manager子工程<br>
+(1)common<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1589010610421.PNG" alt="" loading="lazy"><br>
+作用主要是放工具类<br>
+(2)manager<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1589010823973.PNG" alt="" loading="lazy"><br>
+作为dao.pojo.service.web的父项目</p>
+<p>1.3.创建dao.pojo.service.web子项目<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1589011003419.PNG" alt="" loading="lazy"><br>
+(1)pojo,主要放实体类,jar项目,不需要任何依赖<br>
+(2)dao,主要放mapper接口和mapper.xml文件,jar项目,需要引用pojo项目并导入需要的依赖<br>
+(3)service,业务逻辑代码,jar项目,引用dao项目并导入需要的依赖<br>
+(4)web,处理请求并返回数据,引用service项目,必须为war项目并配置spring和mvc和web.xml.<code>运行项目</code></p>
+<h1 id="2重要技术点">2.重要技术点</h1>
+<ul>
+<li><strong>后台的类别加载</strong><br>
+1.类别分类是用的easyui的一个控件:catTree(节点如果是父节点state就是closed,如果不是父节点就是open),他需要的数据是一个集合:Long id,Long parentId,Stirng name,Boolean isParent,String text,String state.所以首先应该在bo包中,新建CatTree.java,在作为专门为catTree返回数据的类.由于大部分属性与类别表中的属性一样,所以在CatTree中继承类别表,然后<br>
+再手动定义catTree另外所需要的属性.<br>
+2.Service中的代码 目的:查询出来的数据变成CatTree控件所需要的数据,然后返回出去</li>
+</ul>
+<h1 id="service">Service</h1>
+<pre><code>public List&lt;CatTree&gt; selectItimeCatList(long pid) {		//传入父类ID
+TbItemCatExample example = new TbItemCatExample();
+//添加查询条件
+example.createCriteria().andParentIdEqualTo(pid);
+//将查询出来的数据放到list集合
+List&lt;TbItemCat&gt; list = tbItemCatMapper.selectByExample(example);
+//JDK8的特性  循环遍历集合 将list&lt;TbItemCat&gt;变成list&lt;CatTree&gt;
+List&lt;CatTree&gt; treelist = list.stream().map(cat-&gt;
+{
+	CatTree tree = new CatTree();
+	//BeanUtils是springframwork的工具类 是将一个实体类中相同的属性copy到另一个实体类中去
+	BeanUtils.copyProperties(cat, tree);
+	//不相同的需要手动去set进去了
+	tree.setText(cat.getName());
+	//这里是判断是否为父节点,ture:为closed,false:为open
+	tree.setState(cat.getIsParent()?&quot;closed&quot;:&quot;open&quot;);
+	return tree;
+}).collect(Collectors.toList()); //将返回的一个个类放到list集合中
+return treelist;
+}
+</code></pre>
+
       </div>
     </article>
   

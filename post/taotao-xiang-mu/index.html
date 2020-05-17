@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>taotao项目 | Wh1te5old</title>
-<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1589612767612">
+<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1589704013590">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="taotao项目 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
@@ -25,7 +25,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://wh1te5old.GitHub.io">
-  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1589612767612" alt="">
+  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1589704013590" alt="">
   </a>
   <h1 class="site-title">
     Wh1te5old
@@ -85,7 +85,7 @@
                 2017-05-04
               </span>
               <span>
-                2 min read
+                6 min read
               </span>
               
                 <a href="https://wh1te5old.GitHub.io/tag/M64LxckiZ/" class="post-tag">
@@ -121,6 +121,111 @@
 (2)dao,主要放mapper接口和mapper.xml文件,jar项目,需要引用pojo项目并导入需要的依赖<br>
 (3)service,业务逻辑代码,jar项目,引用dao项目并导入需要的依赖<br>
 (4)web,处理请求并返回数据,引用service项目,必须为war项目并配置spring和mvc和web.xml.<code>运行项目</code></p>
+<h1 id="2重要技术点">2.重要技术点</h1>
+<ul>
+<li><strong>后台的类别加载</strong><br>
+1.类别分类是用的easyui的一个控件:catTree(节点如果是父节点state就是closed,如果不是父节点就是open),他需要的数据是一个集合:Long id,Long parentId,Stirng name,Boolean isParent,String text,String state.所以首先应该在bo包中,新建CatTree.java,在作为专门为catTree返回数据的类.由于大部分属性与类别表中的属性一样,所以在CatTree中继承类别表,然后<br>
+再手动定义catTree另外所需要的属性.<br>
+2.Service中的代码 目的:查询出来的数据变成CatTree控件所需要的数据,然后返回出去</li>
+</ul>
+<h1 id="service">Service</h1>
+<pre><code>public List&lt;CatTree&gt; selectItimeCatList(long pid) {		//传入父类ID
+TbItemCatExample example = new TbItemCatExample();
+//添加查询条件
+example.createCriteria().andParentIdEqualTo(pid);
+//将查询出来的数据放到list集合
+List&lt;TbItemCat&gt; list = tbItemCatMapper.selectByExample(example);
+//JDK8的特性  循环遍历集合 将list&lt;TbItemCat&gt;变成list&lt;CatTree&gt;
+List&lt;CatTree&gt; treelist = list.stream().map(cat-&gt;
+{
+	CatTree tree = new CatTree();
+	//BeanUtils是springframwork的工具类 是将一个实体类中相同的属性copy到另一个实体类中去
+	BeanUtils.copyProperties(cat, tree);
+	//不相同的需要手动去set进去了
+	tree.setText(cat.getName());
+	//这里是判断是否为父节点,ture:为closed,false:为open
+	tree.setState(cat.getIsParent()?&quot;closed&quot;:&quot;open&quot;);
+	return tree;
+}).collect(Collectors.toList()); //将返回的一个个类放到list集合中
+return treelist;
+}
+</code></pre>
+<!-- more -->
+<ul>
+<li><strong>图片上传</strong><br>
+1.搭建nginx静态服务器 (条件:一个Linux操作系统,安装docker,Xshell连接工具,Xftp上传工具)<br>
+(1)启动虚拟机,打开Xshell,新建会话,创建连接,连接成功.<br>
+(2)拉取nginx镜像 : docker pull nginx<br>
+(3)(1)创建docker文件夹 -&gt; (2)创建nginx文件夹 -&gt; (3)创建html文件夹 -&gt; (3)创建conf文件夹 -&gt; (3)创建logs文件夹<br>
+(4)上传nginx.conf和mime.types配置文件(标签:工具类),将nginx.conf和mime.types上传到conf文件夹,然后重启容器<br>
+(5)将文件夹挂载到nginx容器里 : docker run -d -p 80:80 --name nginx -v /docker/nginx/html:/usr/share/nginx/html -v /docker/nginx/conf:/etc/nginx -v /docker/nginx/logs:/var/log/nginx --restart=always nginx:latest<br>
+(6)修改nginx中的Server-&gt;server_name为localhost,listen默认端口80,然后输入地址http://ip地址,访问nginx服务器<br>
+2.工具类+Controller+Service<br>
+(1)工具类SFtpUtils所需要的jar包:com.jcraft-jsch(标签:工具类)<br>
+(2)properties文件</li>
+</ul>
+<!-- more -->
+<pre><code>#sftp
+#iP
+SFTP_HOST=192.168.146.128  
+#duan kou hao
+SFTP_PORT=22
+#yong hu ming
+SFTP_USERNAME=root
+#mima
+SFTP_PASSWORD=123456
+#chaoshi time
+SFTP_TIMEOUT=6000
+#gen mu lu di zhi
+SFTP_BASEPATH=/docker/nginx/html/
+#fang wen di zhi
+SFTP_IMAGEURL=http://192.168.146.128/
+</code></pre>
+<p>(3)Controller 控制层</p>
+<!-- more -->
+<pre><code>@PostMapping(&quot;/pic/upload&quot;)                 //名字一定要和传过来的一样
+public PictureResult  uploadImage(MultipartFile uploadFile)  { //     PictureResult:工具类
+return  uploadService.uploadImage(uploadFile);
+}
+</code></pre>
+<p>(4)Service 业务层</p>
+<!-- more -->
+<pre><code>@Value(&quot;${SFTP_HOST}&quot;)
+String host;
+
+@Value(&quot;${SFTP_PORT}&quot;)
+Integer port;
+
+@Value(&quot;${SFTP_USERNAME}&quot;)
+String username;
+
+@Value(&quot;${SFTP_PASSWORD}&quot;)
+String password;
+
+@Value(&quot;${SFTP_TIMEOUT}&quot;)
+Integer time;
+
+@Value(&quot;${SFTP_BASEPATH}&quot;)
+String basePath;
+
+@Value(&quot;${SFTP_IMAGEURL}&quot;)
+String url;
+public PictureResult  uploadImage(MultipartFile uploadFile){
+    String oldName =  uploadFile.getOriginalFilename(); //上传的图片原名称
+    String datePath =  IDUtils.getFilePath();//生成年/月/日格式的文件路径名称
+    String fileName =  IDUtils.genImageName()+oldName.substring(oldName.lastIndexOf(&quot;.&quot;));   //生成图片名称,带后缀名
+    try {
+        //使用工具类上传图片
+        SFtpUtils.uploadFile(host,  port, username, password, time,  uploadFile.getInputStream(),  basePath+datePath, fileName);
+        //返回结果
+        return  PictureResult.ok(url+datePath+fileName);
+    }catch (Exception e) {
+        // TODO Auto-generated catch  block
+        e.printStackTrace();
+        return  PictureResult.error();
+    }
+}
+</code></pre>
 <h1 id="2遇到的问题">2.遇到的问题</h1>
 <p><code>2.1.没有使用mysql8.0,驱动无效,无报错.出错前是用的mysql5.6</code><br>
 解决:参考文章:mysql8.0安装,安装后使用com.mysql.cj.jdbc.Driver的驱动,并在url后面加上?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true&amp;serverTimezone=Asia/Shanghai,修改mybatis逆向工程xml文件里的url,加入&lt; property name=&quot;nullCatalogMeansCurrent&quot; value=&quot;true&quot;/&gt;</p>
@@ -133,6 +238,8 @@
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li><a href="#1%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">1.项目结构</a></li>
+<li><a href="#2%E9%87%8D%E8%A6%81%E6%8A%80%E6%9C%AF%E7%82%B9">2.重要技术点</a></li>
+<li><a href="#service">Service</a></li>
 <li><a href="#2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">2.遇到的问题</a></li>
 </ul>
 
