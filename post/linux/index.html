@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Linux | Wh1te5old</title>
-<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1590204857532">
+<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1590214201793">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Linux | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
@@ -11,12 +11,14 @@
 
 
 
-    <meta name="description" content="Linux基本操作
+    <meta name="description" content="Linux
+Linux基本操作
+
 cd	/	 跳到根目录下面
 cd	~	跳到家的目录下面
 l1		   显示当前目录下面的所有文件和文件夹
 cd		  路径地址跳转到某一个路径下面
-Su		 用户名切换到某一个用户 (如果不输入用户名，就是切换到管理 员..." />
+Su		 用户名切换到某一个用户 (如果不输入用户名，就是..." />
     <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
@@ -26,7 +28,7 @@ Su		 用户名切换到某一个用户 (如果不输入用户名，就是切换�
       <div class="main-content">
         <div class="site-header">
   <a href="https://wh1te5old.GitHub.io">
-  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1590204857532" alt="">
+  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1590214201793" alt="">
   </a>
   <h1 class="site-title">
     Wh1te5old
@@ -86,14 +88,18 @@ Su		 用户名切换到某一个用户 (如果不输入用户名，就是切换�
                 2020-05-23
               </span>
               <span>
-                3 min read
+                7 min read
               </span>
               
             </div>
             
+              <img class="post-feature-image" src="https://wh1te5old.GitHub.io/post-images/linux.jpg" alt="">
+            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <h1 id="linux基本操作">Linux基本操作</h1>
+                <h1 id="linux">Linux</h1>
+<p><strong>Linux基本操作</strong></p>
+<!-- more -->
 <pre><code>cd	/	 跳到根目录下面
 cd	~	跳到家的目录下面
 l1		   显示当前目录下面的所有文件和文件夹
@@ -137,13 +143,142 @@ Ctrl+r			         多次撤消
 查询所有的用户:	vim /etc/passwd
 </code></pre>
 <!-- more -->
-<h1 id="docker基本操作">docker基本操作</h1>
+<p><strong>分组+权限指令</strong></p>
+<!-- more -->
+<pre><code>一个用户只能有一个主组, 可以有其他的附属组
+新建组: groupadd j206
+查看组: vim /etc/group
+删除组: groupdel j206
+
+修改用户去哪个组:
+usermod -g 组名  用户名    主组
+usermod -G 组名  用户名    附属组
+
+所有者  组名                       
+drwx------. 15 whcm   whcm   4096 Nov  3 19:51 whcm
+状态说明:
+rwxr-xr-x
+r  read    4   
+w  write   2  
+x    执行  1
+
+修改文件或者文件夹的权限: 只有 所有者 和 root能够修改
+chmod 777 文件
+chmod 777 -R 文件
+
+修改文件的所有者
+chown 用户名 文件
+chown 用户名 -R 文件
+
+查看 进程运行情况
+ps -ef | grep ssh
+
+结束某个进行或者服务
+killall 服务名
+</code></pre>
+<!-- more -->
+<h1 id="docker">docker</h1>
+<p><strong>docker 安装:</strong></p>
+<!-- more -->
+<pre><code>    1   查看linux内核版本
+        uname -a
+        升级内核版本
+        yum -y update   (所有的全面升级)
+        yum -y upgrade   (升级软件包)
+    2   安装软件包
+        yum install -y yum-utils device-mapper-persistent-data lvm2    
+    3   设置yum的源为 阿里云
+        yum-config-manager --add-repo http://mirrors.aliyun.com/docker-ce/linux/centos/docker-ce.repo
+    4   安装docker
+        yum install docker-ce
+    5   查看docker版本    
+        docker -v
+    6   修改docker的镜像地址
+        在此路径新建配置文件 /etc/docker/daemon.json , 并且修改其中内容为以下:
+        {
+            &quot;registry-mirrors&quot;: [&quot;https://registry.docker-cn.com&quot;, &quot;http://hub-mirror.c.163.com&quot;,&quot;https://docker.mirrors.ustc.edu.cn&quot;],
+            &quot;insecure-registries&quot;:[&quot;192.168.135.163:5000&quot;]
+        }
+    7   启动docker
+        systemctl start docker
+    8   重启   
+        systemctl restart docker
+    9     开机自启
+        systemctl enable docker
+</code></pre>
+<!-- more -->
+<p><strong>docker的基本操作</strong></p>
+<!-- more -->
+<pre><code>1.docker的架构:
+镜像    :    类
+容器    :    对象
+
+2.镜像的操作
+搜索    查询   docker search 镜像名称.  
+拉取           docker pull 镜像名称.  
+删除           docker rmi 镜像名称
+修改镜像名称   docker tag 旧名称  新名称
+查看本机上有哪些镜像    docker images
+//查看私服上的镜像:http://192.168.135.163:5000/v2/_catalog
+//查看私服上镜像的版本:http://192.168.135.163:5000/v2/mysql/tags/list
+
+3.容器的操作
+查看运行中的容器:  docker ps
+查看所有的容器, 包含未运行的:        docker ps -a
+交互式创建: docker run -ti --name mysql01 mysql /bin/bash    创建完之后直接进入到了容器里面,  如果退出容器,  容器自动关闭
+后台式创建 : docker run -di --name mysql02 mysql     
+创建mysql容器的时候, 一定要指定root的密码:docker run -di --name mysql03 -e MYSQL_ROOT_PASSWORD=123456 mysql
+进入容器:  docker exec -it mysql03 /bin/bash
+删除容器: docker rm 容器名称/id
+开启容器: docker start mysql03
+
+4.日志查看
+docker logs -f 容器名称
+
+5.文件的复制
+docker cp 1.txt mysql03:/usr/local
+
+6.创建容器并且端口映射, 外网才能访问容器
+docker run -di --name mysql03 -e MYSQL_ROOT_PASSWORD=123456 -p 3306:3306 mysql
+
+7.创建容器时进行挂载:
+docker run -di --name centos -v /usr/local/jdk/:/usr/local/src centos
+
+8.创建镜像
+1.通过容器创建
+docker commit -m=”镜像的描述” -a=”作者” 容器id  镜像名称:版本号
+2.通过dockefile创建jdk1.8
+    1.在宿主机中创建文件夹  /usr/local/jdk
+    2.将jdk的文件上传到 这个文件夹中  jdk-8u171-linux-x64.tar.gz
+    3.解压上传的文件  tar -zxvf jdk-8u171-linux-x64.tar.gz
+    4.在当前文件夹下创建文件 Dockerfile
+    5.编辑Dockerfile 文件内容为……参见Dockerfile    6.开始创建镜像: docker build -t jdk1.8
+9.私有仓库的构建
+    1. 
+搭建私有仓库的服务
+
+
+访问私有仓库:  192.168.88.148:5000/v2_catalog
+    1. 
+在客户端的 daemon.json  中添加信任
+
+
+{
+“insecure-registries”:[“192.168.88.148:5000”]
+}
+    1. 
+上传镜像到私服
+
+
+docker    tag    jdk1.8    192.168.88,141:5000/jdk1.8
+docker push 192.168.88,141:5000/jdk1.8
+</code></pre>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
-<li><a href="#linux%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">Linux基本操作</a></li>
-<li><a href="#docker%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">docker基本操作</a></li>
+<li><a href="#linux">Linux</a></li>
+<li><a href="#docker">docker</a></li>
 </ul>
 
               </div>
