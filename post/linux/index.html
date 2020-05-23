@@ -2,23 +2,22 @@
   <head>
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>关于 | Wh1te5old</title>
+<title>Linux | Wh1te5old</title>
 <link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1590204857532">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
-<link rel="alternate" type="application/atom+xml" title="关于 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
+<link rel="alternate" type="application/atom+xml" title="Linux | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Droid+Serif:400,700">
 
 
 
-    <meta name="description" content="您好,欢迎来到我的个人站🙋‍♂
-我在这里记录关于编程的内容,一是方便复习,二是为了分享给对编程感兴趣的人😃
-如果发现有任何问题请联系我🤝谢谢
-QQ:2251612642
-邮箱:wh1te5old@163.com
-部分资料地址:
-spr..." />
-    <meta name="keywords" content="关于" />
+    <meta name="description" content="Linux基本操作
+cd	/	 跳到根目录下面
+cd	~	跳到家的目录下面
+l1		   显示当前目录下面的所有文件和文件夹
+cd		  路径地址跳转到某一个路径下面
+Su		 用户名切换到某一个用户 (如果不输入用户名，就是切换到管理 员..." />
+    <meta name="keywords" content="" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.10.0/katex.min.css">
     <script src="https://cdn.bootcss.com/highlight.js/9.12.0/highlight.min.js"></script>
   </head>
@@ -80,38 +79,73 @@ spr..." />
         <div class="post-detail">
           <article class="post">
             <h2 class="post-title">
-              关于
+              Linux
             </h2>
             <div class="post-info">
               <span>
-                2019-01-25
+                2020-05-23
               </span>
               <span>
-                1 min read
+                3 min read
               </span>
-              
-                <a href="https://wh1te5old.GitHub.io/tag/b-flGYGCf/" class="post-tag">
-                  # 关于
-                </a>
               
             </div>
             
-              <img class="post-feature-image" src="https://wh1te5old.GitHub.io/post-images/about.jpg" alt="">
-            
             <div class="post-content-wrapper">
               <div class="post-content">
-                <p>您好,欢迎来到我的个人站🙋‍♂<br>
-我在这里记录关于编程的内容,一是方便复习,二是为了分享给对编程感兴趣的人😃</p>
-<p>如果发现有任何问题请联系我🤝谢谢<br>
-QQ:2251612642<br>
-邮箱:wh1te5old@163.com</p>
-<p>部分资料地址:<br>
-spring MVC,spring部分:《互联网轻量级SSM框架解密:Spring,Spring MVC,Mybatis源码深度剖析》+https://www.yiibai.com/<br>
-Java基础部分:《Java从入门到精通 》</p>
+                <h1 id="linux基本操作">Linux基本操作</h1>
+<pre><code>cd	/	 跳到根目录下面
+cd	~	跳到家的目录下面
+l1		   显示当前目录下面的所有文件和文件夹
+cd		  路径地址跳转到某一个路径下面
+Su		 用户名切换到某一个用户 (如果不输入用户名，就是切换到管理 员账号)
+pwd	  查看当前所处的路径位置
+cd..	    网上跳-级
+mkdir	新建文件夹
+mkdir  -p	递归新建路径 下的多个文件夹	html/a/b/c/d
+rmdir	删除文件夹
+rmdir -p	递归删除路径 下的多个文件夹htm1/a/b/c/d
+rm              删除文件夹或者文件
+rm  -r		删除文件夹以及文件夹下面的所有文件
+rm -rf	   强制删除文件夹以及文件夹下面的所有文件
+cat 文件   	查看文件
+cat&gt;文件	  新建文件
+移动文件或者文件夹: mv	文件	目标位置
+复制文件或者文件夹: cp	 文件	目标位置
+//文件的操作
+vim / vi	编辑文件,文件名称/文件的全路径如果这个文件不存在,那么创建文件，如果存在 ，就打开这个文件
+命令行----&gt;	写入状态 i
+命令行:无法修改文件里 面的内容,可以输入很多的指令
+写入状态---&gt; 	命令行状态 esc
+写入状态:		 无法输入指令，可以修改文件的内容
+命令行状态:
+保存并且退出         : wq
+不保存强制退出         :q!
+显示行号         :set nu
+删除一行         dd
+查找          /查找的内容
+跳转到最后一行         shift+g
+跳转到第一行         gg
+u		         撤消上一个操作
+Ctrl+r			         多次撤消
+整页翻页命令为: Ctrl+f	键	f的英文全拼为: forward  ; Ctrl +b   键	b的英文全拼为: backWord;
+写入状态:         可以往文件里面写入数据
+[0]pen Read-0nly, (E)dit anyway, (R)ecover, (D)elete it, (Q)uit, (A)bort://创空的文件touch 4. sh
+创建用户: useradd 用户名
+切换用户: su 用户名
+删除用户(包括用户自带的文件夹):userdel  -rf 用户名
+查询所有的用户:	vim /etc/passwd
+</code></pre>
+<!-- more -->
+<h1 id="docker基本操作">docker基本操作</h1>
 
               </div>
               <div class="toc-container">
-                
+                <ul class="markdownIt-TOC">
+<li><a href="#linux%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">Linux基本操作</a></li>
+<li><a href="#docker%E5%9F%BA%E6%9C%AC%E6%93%8D%E4%BD%9C">docker基本操作</a></li>
+</ul>
+
               </div>
             </div>
           </article>
@@ -120,9 +154,9 @@ Java基础部分:《Java从入门到精通 》</p>
         
           <div class="next-post">
             <div class="next">下一篇</div>
-            <a href="https://wh1te5old.GitHub.io/post/gong-ju-lei/">
+            <a href="https://wh1te5old.GitHub.io/post/yong-idea-da-jian-ssm-kuang-jia/">
               <h3 class="post-title">
-                工具类
+                搭建SSM框架(idea)
               </h3>
             </a>
           </div>

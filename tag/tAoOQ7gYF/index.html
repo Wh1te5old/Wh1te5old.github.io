@@ -3,7 +3,7 @@
   <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>Java | Wh1te5old</title>
-<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1589704013590">
+<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1590204857532">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="Java | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
@@ -18,7 +18,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://wh1te5old.GitHub.io">
-  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1589704013590" alt="">
+  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1590204857532" alt="">
   </a>
   <h1 class="site-title">
     Wh1te5old
@@ -207,7 +207,7 @@ JavaEE是Java的企业版，主要用于开发企业级分布式的网络程序�
           2017-05-04
         </span>
         <span>
-          6 min read
+          12 min read
         </span>
         
           <a href="https://wh1te5old.GitHub.io/tag/M64LxckiZ/" class="post-tag">
@@ -250,28 +250,6 @@ JavaEE是Java的企业版，主要用于开发企业级分布式的网络程序�
 再手动定义catTree另外所需要的属性.<br>
 2.Service中的代码 目的:查询出来的数据变成CatTree控件所需要的数据,然后返回出去</li>
 </ul>
-<h1 id="service">Service</h1>
-<pre><code>public List&lt;CatTree&gt; selectItimeCatList(long pid) {		//传入父类ID
-TbItemCatExample example = new TbItemCatExample();
-//添加查询条件
-example.createCriteria().andParentIdEqualTo(pid);
-//将查询出来的数据放到list集合
-List&lt;TbItemCat&gt; list = tbItemCatMapper.selectByExample(example);
-//JDK8的特性  循环遍历集合 将list&lt;TbItemCat&gt;变成list&lt;CatTree&gt;
-List&lt;CatTree&gt; treelist = list.stream().map(cat-&gt;
-{
-	CatTree tree = new CatTree();
-	//BeanUtils是springframwork的工具类 是将一个实体类中相同的属性copy到另一个实体类中去
-	BeanUtils.copyProperties(cat, tree);
-	//不相同的需要手动去set进去了
-	tree.setText(cat.getName());
-	//这里是判断是否为父节点,ture:为closed,false:为open
-	tree.setState(cat.getIsParent()?&quot;closed&quot;:&quot;open&quot;);
-	return tree;
-}).collect(Collectors.toList()); //将返回的一个个类放到list集合中
-return treelist;
-}
-</code></pre>
 
       </div>
     </article>

@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>taotao项目 | Wh1te5old</title>
-<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1589704013590">
+<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1590204857532">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="taotao项目 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
@@ -25,7 +25,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://wh1te5old.GitHub.io">
-  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1589704013590" alt="">
+  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1590204857532" alt="">
   </a>
   <h1 class="site-title">
     Wh1te5old
@@ -85,7 +85,7 @@
                 2017-05-04
               </span>
               <span>
-                6 min read
+                12 min read
               </span>
               
                 <a href="https://wh1te5old.GitHub.io/tag/M64LxckiZ/" class="post-tag">
@@ -128,7 +128,7 @@
 再手动定义catTree另外所需要的属性.<br>
 2.Service中的代码 目的:查询出来的数据变成CatTree控件所需要的数据,然后返回出去</li>
 </ul>
-<h1 id="service">Service</h1>
+<!-- more -->
 <pre><code>public List&lt;CatTree&gt; selectItimeCatList(long pid) {		//传入父类ID
 TbItemCatExample example = new TbItemCatExample();
 //添加查询条件
@@ -226,21 +226,209 @@ public PictureResult  uploadImage(MultipartFile uploadFile){
     }
 }
 </code></pre>
-<h1 id="2遇到的问题">2.遇到的问题</h1>
-<p><code>2.1.没有使用mysql8.0,驱动无效,无报错.出错前是用的mysql5.6</code><br>
+<!-- more -->
+<ul>
+<li><strong>HTTP跨服务请求</strong><br>
+1.taotao-Search : 查询数据<br>
+(1)Search-Service</li>
+</ul>
+<!-- more -->
+<pre><code>//solr的地址
+@Value(&quot;${SOLR_BASE_URL}&quot;)
+String solrUrl;
+public Map&lt;String, Object&gt;  getResult(String q, Integer page,  Integer rows) throws  SolrServerException, IOException {
+    Map&lt;String, Object&gt; result = new  HashMap&lt;String, Object&gt;();
+    System.out.println(page+&quot;-&quot;+rows+&quot;-&quot;+q+&quot;searchService&quot;);
+    //创建solr连接
+    HttpSolrClient client = new  HttpSolrClient.Builder(solrUrl).build();
+  
+  //创建查询条件的对象 用来设置所有的查询条件
+  SolrQuery query = new  SolrQuery();
+  
+  //设置主查询条件
+  if (StringUtils.isEmpty(q)) {
+      query.setQuery(&quot;*:*&quot;);
+      q=&quot;&quot;;
+  }else {
+      query.setQuery(&quot;title:&quot;+q);
+  }
+  
+  //设置分页
+  query.setStart( (page-1)*rows );
+  query.setRows(rows);
+  
+  //设置高亮
+  query.setHighlight(true); //打开高亮显示
+  query.addHighlightField(&quot;title&quot;); //设置高亮显示的域名
+  query.setHighlightSimplePre(&quot;&lt;span  style='color:red'&gt;&quot;);  //设置高亮显示的前缀
+  query.setHighlightSimplePost(&quot;&lt;/span&gt;&quot;);        //设置高亮显示的后缀
+  
+  //获取查询结果
+  QueryResponse result1 =  client.query(query);
+   SolrDocumentList response =  result1.getResults(); //取出查询结果
+   Map&lt;String, Map&lt;String,  List&lt;String&gt;&gt;&gt; highlighting =  result1.getHighlighting(); //取出高亮的结果
+   
+  //循环SolrDocumentList  封装为我们需要的数据
+   List&lt;ItemBiz&gt; list = new  ArrayList&lt;ItemBiz&gt;();
+   for (SolrDocument solrDocument  : response) {
+      ItemBiz biz = new ItemBiz();
+      biz.setImage(solrDocument.get(&quot;image&quot;).toString());
+      biz.setPrice(Long.parseLong(solrDocument.get(&quot;price&quot;).toString()));
+      biz.setId(Long.parseLong(solrDocument.get(&quot;id&quot;).toString()));
+      //根据id取出对应的高亮
+      Map&lt;String, List&lt;String&gt;&gt; hm  = highlighting.get(  solrDocument.get(&quot;id&quot;).toString() );
+      //当没有主查询条件的时候   直接从查询结果中取出product_name
+      //如果有查询条件   从高亮中取出查询结果
+      if (hm!=null&amp;&amp;hm.size()&gt;0) {
+         List&lt;String&gt; hl =  hm.get(&quot;title&quot;);
+         biz.setTitle(hl.get(0).toString());
+      }else {
+         biz.setTitle(solrDocument.get(&quot;title&quot;).toString());
+      }
+      list.add(biz);
+  }
+   
+   //封装需要的result
+   result.put(&quot;itemList&quot;, list);
+   result.put(&quot;page&quot;, page);
+   result.put(&quot;recordCount&quot;,  response.getNumFound());
+   result.put(&quot;totalPages&quot;,  (response.getNumFound()-1)/rows+1 );
+   result.put(&quot;query&quot;, q);
+   
+  return result;
+ }
+</code></pre>
+<!-- more -->
+<p>(2)Search-Controller : 返回Json数据</p>
+<!-- more -->
+<pre><code>@Autowired
+tao.zx.taotao.search.service.SearchService searchService;
+
+@GetMapping(value =  &quot;/search&quot;,produces =  MediaType.APPLICATION_JSON_UTF8_VALUE)
+public String getResult(String  q,Integer page,Integer rows) throws  SolrServerException, IOException {
+    return  JsonUtils.serialize(searchService.getResult(q,page,rows));
+}
+</code></pre>
+<!-- more -->
+<p>2.portal-web : 获取json数据 返回页面</p>
+<!-- more -->
+<pre><code>@GetMapping(&quot;/search.html&quot;)
+public String search(Model  model,String q,Integer page,Integer  rows) throws Exception {
+    //封装请求参数
+    List&lt;NameValuePair&gt; list = new  ArrayList&lt;NameValuePair&gt;();
+    list.add(new  BasicNameValuePair(&quot;q&quot;, q));
+    list.add(new  BasicNameValuePair(&quot;page&quot; ,  (page==null?1:page)+&quot;&quot;));
+    list.add(new  BasicNameValuePair(&quot;rows&quot; ,  (rows==null?12:rows)+&quot;&quot;));
+    //把list传过去 然后接收数据
+    String json =  HttpClientUtils.doGet(&quot;http://127.0.0.1:11080/search&quot;,list);
+    //将接收的json数据转成map集合
+    Map&lt;String, Object&gt; map =  JsonUtils.parseMap(json, String.class,  Object.class);
+    //将数据放到model里
+    model.addAttribute(&quot;itemList&quot;,  map.get(&quot;itemList&quot;));
+    model.addAttribute(&quot;page&quot;,  map.get(&quot;page&quot;));
+    model.addAttribute(&quot;totalPages&quot;,  map.get(&quot;totalPages&quot;));
+    model.addAttribute(&quot;query&quot;, q);
+    //返回页面
+    return &quot;search&quot;;
+}
+</code></pre>
+<!-- more -->
+<ul>
+<li><strong>JSONP跨域请求</strong></li>
+<li>1.portal-api : 从数据库查数据,封装后再用json格式返回<br>
+(1)Controller</li>
+</ul>
+<!-- more -->
+<pre><code>@Autowired
+ItemCatService itemCatService;
+
+@GetMapping(&quot;/itemcat/all&quot;)  //?callback=category.getDataService
+public String SelectitemCat(String  callback)
+{
+    //接收数据并转换为json格式
+    String json =  JsonUtils.serialize(itemCatService.selectCat());
+    return callback+&quot;(&quot;+json+&quot;)&quot;;
+}
+</code></pre>
+<!-- more -->
+<p>(2)Service</p>
+<!-- more -->
+<pre><code>public Map&lt;String, Object&gt; selectCat()  {
+//接收数据传一个0,先查父类为0的类型
+List result = getCat(0l);
+//封装
+Map&lt;String, Object&gt; map = new  HashMap&lt;String, Object&gt;();
+map.put(&quot;data&quot;,result);
+return map;
+}
+
+public List getCat(Long pid)//传过来一个父ID
+{
+    //只查14个父ID为0的
+    if (pid==0) {
+        PageHelper.startPage(0, 14);
+    }
+    //查询
+    TbItemCatExample example = new  TbItemCatExample();
+    example.createCriteria().andParentIdEqualTo(pid);
+    List&lt;TbItemCat&gt; cat =  catMapper.selectByExample(example);
+    //封装数据
+    List nodelist = new  ArrayList&lt;&gt;();
+    //foreach循环cat集合
+    for (TbItemCat tbItemCat : cat)  {
+        //判断是否为父类ID
+        if (tbItemCat.getIsParent())  {
+            //用CatNode放数据
+            CatNode node = new  CatNode();
+            node.setU(&quot;/products&quot;+tbItemCat.getId()+&quot;.html&quot;);
+            //父类和子类的N,格式不一样
+            if (pid==0) {
+                node.setN(&quot;&lt;a  href='/products&quot;+tbItemCat.getId()+&quot;1.html'&gt;&quot;+tbItemCat.getName());
+            }else
+            {
+                node.setN(tbItemCat.getName());
+            }
+                //递归    非子类I里面也是U N I,所以把本身的ID作为父类再查U N I
+                node.setI(getCat(tbItemCat.getId()));
+                nodelist.add(node);
+        }else
+        {
+            //最后一个节点
+            nodelist.add(&quot;/products/&quot;+tbItemCat.getId()+&quot;.html|&quot;+tbItemCat.getName());
+        }
+    }
+    //返回集合
+    return nodelist;   
+}
+</code></pre>
+<!-- more -->
+<p>2.portal-web : 使用JSONP实现跨域请求<br>
+(2)js代码</p>
+<!-- more -->
+<pre><code>//向9080发送请求
+URL_Serv:  &quot;http://127.0.0.1:9080/itemcat/all?callback=category.getDataService&quot;
+//获取数据
+$.getJSONP(this.URL_Serv,  category.getDataService);
+数据填充省略...
+</code></pre>
+<!-- more -->
+<h1 id="遇到的问题">遇到的问题</h1>
+<p><code>1.1.驱动无效,无报错.</code><br>
 解决:参考文章:mysql8.0安装,安装后使用com.mysql.cj.jdbc.Driver的驱动,并在url后面加上?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true&amp;serverTimezone=Asia/Shanghai,修改mybatis逆向工程xml文件里的url,加入&lt; property name=&quot;nullCatalogMeansCurrent&quot; value=&quot;true&quot;/&gt;</p>
-<p><code>2.2.在eclipse里新建的一个空间里写taotao项目,tomcat启动时报错</code><br>
+<p><code>1.2.在eclipse里新建的一个空间里写taotao项目,tomcat启动时报错</code><br>
 报错:Caused by: java.util.zip.ZipException: invalid LOC header (bad signature)<br>
 解决:目前没解决<br>
 分析:可能是新建的空间的一些配置没有配好,或者jar包冲突</p>
+<p><code>1.3 连接不上nginx服务器</code><br>
+报错 : IP地址<br>
+复盘 : 在写SFTP的配置时,nginx的IP地址后面多了一个空格....找了很久,甚至影响心态,所以写配置文件时一定要仔细.排错的时候要仔细.</p>
 
               </div>
               <div class="toc-container">
                 <ul class="markdownIt-TOC">
 <li><a href="#1%E9%A1%B9%E7%9B%AE%E7%BB%93%E6%9E%84">1.项目结构</a></li>
 <li><a href="#2%E9%87%8D%E8%A6%81%E6%8A%80%E6%9C%AF%E7%82%B9">2.重要技术点</a></li>
-<li><a href="#service">Service</a></li>
-<li><a href="#2%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">2.遇到的问题</a></li>
+<li><a href="#%E9%81%87%E5%88%B0%E7%9A%84%E9%97%AE%E9%A2%98">遇到的问题</a></li>
 </ul>
 
               </div>
