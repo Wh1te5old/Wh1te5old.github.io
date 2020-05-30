@@ -3,7 +3,7 @@
     <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>taotao项目 | Wh1te5old</title>
-<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1590214201793">
+<link rel="shortcut icon" href="https://wh1te5old.GitHub.io/favicon.ico?v=1590842909953">
 <link href="https://cdn.jsdelivr.net/npm/remixicon@2.3.0/fonts/remixicon.css" rel="stylesheet">
 <link rel="stylesheet" href="https://wh1te5old.GitHub.io/styles/main.css">
 <link rel="alternate" type="application/atom+xml" title="taotao项目 | Wh1te5old - Atom Feed" href="https://wh1te5old.GitHub.io/atom.xml">
@@ -25,7 +25,7 @@
       <div class="main-content">
         <div class="site-header">
   <a href="https://wh1te5old.GitHub.io">
-  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1590214201793" alt="">
+  <img class="avatar" src="https://wh1te5old.GitHub.io/images/avatar.png?v=1590842909953" alt="">
   </a>
   <h1 class="site-title">
     Wh1te5old
@@ -85,7 +85,7 @@
                 2017-05-04
               </span>
               <span>
-                12 min read
+                14 min read
               </span>
               
                 <a href="https://wh1te5old.GitHub.io/tag/M64LxckiZ/" class="post-tag">
@@ -228,7 +228,7 @@ public PictureResult  uploadImage(MultipartFile uploadFile){
 </code></pre>
 <!-- more -->
 <ul>
-<li><strong>HTTP跨服务请求</strong><br>
+<li><strong>HTTP跨服务请求(solr查询数据)</strong><br>
 1.taotao-Search : 查询数据<br>
 (1)Search-Service</li>
 </ul>
@@ -277,7 +277,7 @@ public Map&lt;String, Object&gt;  getResult(String q, Integer page,  Integer row
       biz.setId(Long.parseLong(solrDocument.get(&quot;id&quot;).toString()));
       //根据id取出对应的高亮
       Map&lt;String, List&lt;String&gt;&gt; hm  = highlighting.get(  solrDocument.get(&quot;id&quot;).toString() );
-      //当没有主查询条件的时候   直接从查询结果中取出product_name
+      //当没有主查询条件的时候   直接从查询结果中取出title
       //如果有查询条件   从高亮中取出查询结果
       if (hm!=null&amp;&amp;hm.size()&gt;0) {
          List&lt;String&gt; hl =  hm.get(&quot;title&quot;);
@@ -334,8 +334,8 @@ public String search(Model  model,String q,Integer page,Integer  rows) throws Ex
 </code></pre>
 <!-- more -->
 <ul>
-<li><strong>JSONP跨域请求</strong></li>
-<li>1.portal-api : 从数据库查数据,封装后再用json格式返回<br>
+<li><strong>JSONP跨域请求</strong><br>
+1.portal-api : 从数据库查数据,封装后再用json格式返回<br>
 (1)Controller</li>
 </ul>
 <!-- more -->
@@ -412,6 +412,86 @@ $.getJSONP(this.URL_Serv,  category.getDataService);
 数据填充省略...
 </code></pre>
 <!-- more -->
+<ul>
+<li><strong>循环取出json格式数据</strong><br>
+1.json格式<br>
+<img src="https://wh1te5old.GitHub.io/post-images/1590842432496.png" alt="" loading="lazy"><br>
+2.查询数据<br>
+(1)ItemService:</li>
+</ul>
+<!-- more -->
+<pre><code>public TbItemParamItem selectItemParam(Long itemId) {
+        TbItemParamItemExample example = new TbItemParamItemExample();
+        example.createCriteria().andItemIdEqualTo(itemId);
+        List&lt;TbItemParamItem&gt; list = paramMapper.selectByExampleWithBLOBs(example);
+        return list!=null&amp;&amp;list.size()&gt;0?list.get(0):null;
+    }
+</code></pre>
+<!-- more -->
+<p>(2)ItemController</p>
+<!-- more -->
+<pre><code>@GetMapping(&quot;/item/param/{id}&quot;)
+    public String itemparam(@PathVariable Long id) 
+    {
+        return JsonUtils.serialize(itemService.selectItemParam(id));
+    }
+</code></pre>
+<!-- more -->
+<p>3.新建工具类:ParamItemBiz</p>
+<!-- more -->
+<pre><code>package tao.zx.taotao.common.bo;
+
+import java.util.List;
+import java.util.Map;
+
+public class ParamItemBiz {
+    private String group;
+    private List&lt;Map&lt;String, Object&gt;&gt; params;
+    @Override
+    public String toString() {
+        return &quot;ParamItemBiz [group=&quot; + group + &quot;, params=&quot; + params + &quot;]&quot;;
+    }
+    public String getGroup() {
+        return group;
+    }
+    public void setGroup(String group) {
+        this.group = group;
+    }
+    public List&lt;Map&lt;String, Object&gt;&gt; getParams() {
+        return params;
+    }
+    public void setParams(List&lt;Map&lt;String, Object&gt;&gt; params) {
+        this.params = params;
+    }
+
+}
+</code></pre>
+<!-- more -->
+<p>4.循环拼接</p>
+<!-- more -->
+<pre><code>@GetMapping(&quot;/item/param/{id}.html&quot;)
+public String itemparam(@PathVariable Long id) throws Exception 
+{
+	String json = HttpClientUtils.doGet(&quot;http://127.0.0.1:9080/item/param/&quot;+id);
+	TbItemParamItem param = JsonUtils.parse(json, TbItemParamItem.class);
+	String Dataparam = param.getParamData();
+	List&lt;ParamItemBiz&gt; list = JsonUtils.parseList(Dataparam, ParamItemBiz.class);
+	StringBuffer html = new StringBuffer();
+	for (ParamItemBiz paramItemBiz : list) {
+		html.append(&quot;&lt;tr&gt;&quot;);
+		html.append(&quot;&lt;th colspan='2'&gt;&quot;+paramItemBiz.getGroup()+&quot;&lt;/th&gt;&quot;);
+		html.append(&quot;&lt;/tr&gt;&quot;);
+		for (Map&lt;String, Object&gt; params : paramItemBiz.getParams()) {
+			html.append(&quot;&lt;tr&gt;&quot;);
+			html.append(&quot;&lt;th  width='300px'&gt;&quot;+params.get(&quot;k&quot;)+&quot;:&lt;/th&gt;&quot;);
+			html.append(&quot;&lt;th align='left'&gt;&quot;+params.get(&quot;v&quot;)+&quot;&lt;/th&gt;&quot;);
+			html.append(&quot;&lt;/tr&gt;&quot;);
+		}
+	}
+	return html.toString();
+}
+</code></pre>
+<!-- more -->
 <h1 id="遇到的问题">遇到的问题</h1>
 <p><code>1.1.驱动无效,无报错.</code><br>
 解决:参考文章:mysql8.0安装,安装后使用com.mysql.cj.jdbc.Driver的驱动,并在url后面加上?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=true&amp;serverTimezone=Asia/Shanghai,修改mybatis逆向工程xml文件里的url,加入&lt; property name=&quot;nullCatalogMeansCurrent&quot; value=&quot;true&quot;/&gt;</p>
@@ -422,6 +502,39 @@ $.getJSONP(this.URL_Serv,  category.getDataService);
 <p><code>1.3 连接不上nginx服务器</code><br>
 报错 : IP地址<br>
 复盘 : 在写SFTP的配置时,nginx的IP地址后面多了一个空格....找了很久,甚至影响心态,所以写配置文件时一定要仔细.排错的时候要仔细.</p>
+<!-- more -->
+<p>1.4 前台json乱码和html乱码<br>
+问题:返回的json数据乱码<br>
+解决:</p>
+<!-- more -->
+<p>方法一:在springmvc.xml中加入</p>
+<!-- more -->
+<pre><code>&lt;mvc:annotation-driven&gt;
+        &lt;mvc:message-converters&gt;
+        &lt;ref bean=&quot;stringHttpMessageConverter&quot;/&gt;
+        &lt;/mvc:message-converters&gt;
+    &lt;/mvc:annotation-driven&gt;
+
+        &lt;!-- 消息转换器 --&gt;
+&lt;bean id=&quot;stringHttpMessageConverter&quot; class=&quot;org.springframework.http.converter.StringHttpMessageConverter&quot;&gt;
+        &lt;property name=&quot;supportedMediaTypes&quot;&gt;
+            &lt;list&gt;
+                &lt;value&gt;application/json;charset=utf-8&lt;/value&gt;
+                &lt;value&gt;text/html;charset=utf-8&lt;/value&gt;
+            &lt;/list&gt;
+        &lt;/property&gt;
+    &lt;/bean&gt;
+</code></pre>
+<!-- more -->
+<p>方法二:<br>
+在Controller层的处理方法中加入  produces = MediaType.APPLICATION_JSON_UTF8_VALUE    例:</p>
+<!-- more -->
+<pre><code>@GetMapping(value = &quot;/search&quot;,produces = MediaType.APPLICATION_JSON_UTF8_VALUE)
+    public String getResult(String q,Integer page,Integer rows) throws SolrServerException, IOException {
+        Map&lt;String, Object&gt; json = searchService.getResult(q,page,rows);
+            return JsonUtils.serialize(json);
+}
+</code></pre>
 
               </div>
               <div class="toc-container">
